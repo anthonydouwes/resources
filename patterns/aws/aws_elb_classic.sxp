@@ -3,16 +3,16 @@
 TIMESTAMP('yyyy-MM-ddTHH:mm:ss.SSSSSSZ'):timestamp
 ' ' LD:elb
 ' ' IPADDR:client_ip ':' INT:client_port
-' ' ('-'  | (IPADDR:backend_ip ':' INT:backend_port))
-' ' ('-1' | FLOAT:request_processing_time)
-' ' ('-1' | FLOAT:backend_processing_time)
-' ' ('-1' | FLOAT:response_processing_time)
-' ' ('-'  | INT:elb_status_code)
-' ' ('-'  | INT:backend_status_code)
+' ' (('-'  | (IPADDR:backend_ip ':' INT:backend_port)))
+' ' (('-1' | FLOAT:request_processing_time))
+' ' (('-1' | FLOAT:backend_processing_time))
+' ' (('-1' | FLOAT:response_processing_time))
+' ' (('-'  | INT:elb_status_code))
+' ' (('-'  | INT:backend_status_code))
 ' ' LONG:received_bytes
 ' ' LONG:sent_bytes
 ' ' (('"- - - "' | ('"' LD:request_verb ' ' LD:uri ' ' LD:protocol '"')))
 ' ' (('"-"' | DQS{0,8200}:user_agent)) // 8kB
-' ' ('-' | LD:ssl_cipher)
-' ' ('-' | LD:ssl_protocol)
+' ' (('-' | LD:ssl_cipher))
+' ' (('-' | LD:ssl_protocol))
 EOL
