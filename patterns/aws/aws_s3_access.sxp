@@ -1,7 +1,10 @@
-// $[/shared/patterns/aws_s3.sxp]
-// https://docs.aws.amazon.com/AmazonS3/latest/dev/LogFormat.html
-// NOTE: Any field can be set to - to indicate that the data was unknown
-//       or unavailable, or that the field was not applicable to this request
+/*
+ SpectX pattern for Amazon S3 Server Access Log Format parsing.
+ https://docs.aws.amazon.com/AmazonS3/latest/dev/LogFormat.html
+
+ NOTE: Any field can be set to - to indicate that the data was unknown
+       or unavailable, or that the field was not applicable to this request
+*/
 
 $s3_access_base=( // from year 2012
   NSPACE:bucket_owner
