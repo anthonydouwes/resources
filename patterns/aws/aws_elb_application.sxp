@@ -1,28 +1,29 @@
 // https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html
 
-('https' | 'http' | 'h2' | 'wss' | 'ws'):type
-' ' TIMESTAMP('yyyy-MM-ddTHH:mm:ss.SSSSSSZ'):timestamp 
-' ' LD:elb
-' ' IPADDR:client_ip ':' INT:client_port
-' ' (('-'  | (IPADDR:target_ip ':' INT:target_port)))
-' ' (('-1' | FLOAT:request_processing_time))
-' ' (('-1' | FLOAT:target_processing_time))
-' ' (('-1' | FLOAT:response_processing_time))
-' ' (('-' | INT:elb_status_code))
-' ' (('-' | INT:target_status_code))
-' ' LONG:received_bytes
-' ' LONG:sent_bytes
-' ' (('"- - - "' | ('"' LD:request_verb ' ' LD:uri ' ' LD:protocol '"')))
-' ' (('"-"' | DQS{0,8200}:user_agent)) // 8kB
-' ' (('-' | LD:ssl_cipher))
-' ' (('-' | LD:ssl_protocol))
-' ' LD:target_group_arn
-' ' DQS:trace_id
-' ' (('"-"' | DQS:domain_name))
-' ' (('"-"' | DQS:chosen_cert_arn))
-' ' (('-' | INT:matched_rule_priority))
-' ' TIMESTAMP('yyyy-MM-ddTHH:mm:ss.SSSSSSZ'):request_creation_time
-' ' (('"-"' | DQS:actions_executed))
-' ' (('"-"' | DQS:redirect_url))
-' ' (('"-"' | DQS:error_reason))
-EOL
+(
+  ('https' | 'http' | 'h2' | 'wss' | 'ws'):type
+  TIMESTAMP('yyyy-MM-ddTHH:mm:ss.SSSSSSZ'):timestamp
+  LD:elb
+  (IPADDR:client_ip ':' INT:client_port)
+  (('-'  | (IPADDR:target_ip ':' INT:target_port)))
+  (('-1' | FLOAT:request_processing_time))
+  (('-1' | FLOAT:target_processing_time))
+  (('-1' | FLOAT:response_processing_time))
+  (('-' | INT:elb_status_code))
+  (('-' | INT:target_status_code))
+  LONG:received_bytes
+  LONG:sent_bytes
+  (('"- - - "' | ('"' LD:request_verb ' ' LD:uri ' ' LD:protocol '"')))
+  (('"-"' | DQS{0,8200}:user_agent)) // 8kB
+  (('-' | LD:ssl_cipher))
+  (('-' | LD:ssl_protocol))
+  LD:target_group_arn
+  DQS:trace_id
+  (('"-"' | DQS:domain_name))
+  (('"-"' | DQS:chosen_cert_arn))
+  (('-' | INT:matched_rule_priority))
+  TIMESTAMP('yyyy-MM-ddTHH:mm:ss.SSSSSSZ'):request_creation_time
+  (('"-"' | DQS:actions_executed))
+  (('"-"' | DQS:redirect_url))
+  (('"-"' | DQS:error_reason))
+)(fs=' ') EOL
