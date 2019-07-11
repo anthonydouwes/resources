@@ -1,4 +1,5 @@
 //https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html
+
 TIMESTAMP('yyyy-MM-ddTHH:mm:ss.SSSSSSZ'):timestamp
 ' ' LD:elb
 ' ' IPADDR:client_ip ':' INT:client_port
