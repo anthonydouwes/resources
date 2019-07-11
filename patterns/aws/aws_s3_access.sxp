@@ -25,7 +25,7 @@
   ( // optional fields
 	('-' | LD:host_id)
     ('-' | LD:signature_version)
-    ('-' | LD:chiper_suite)
+    ('-' | LD:cipher_suite)
     ('-' | LD:authentication_type)
     ('-' | LD:host_header)
     ('-' | LD:tls_version)
