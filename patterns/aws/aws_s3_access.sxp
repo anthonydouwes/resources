@@ -1,0 +1,33 @@
+// $[/shared/patterns/aws_s3.sxp]
+// https://docs.aws.amazon.com/AmazonS3/latest/dev/LogFormat.html
+// NOTE: Any field can be set to - to indicate that the data was unknown
+//       or unavailable, or that the field was not applicable to this request
+
+(
+  LD:bucket_owner
+  LD:bucket
+  TIMESTAMP('[dd/MMM/yyyy:HH:mm:ss Z]'):time
+  ('-' | IPADDR:remote_ip)
+  ('-' | LD:requester)
+  ('-' | LD:request_id)
+  ('-' | LD:operation)
+  ('-' | LD:key)
+  ('-' | '"-"' | ('"' LD:request_verb ' ' LD:uri ' ' LD:protocol '"'))
+  ('-' | INT:http_status)
+  ('-' | LD:error_code)
+  ('-' | LONG:bytes_sent)
+  ('-' | LONG:object_size)
+  ('-' | LONG:total_time)
+  ('-' | LONG:turn_around_time)
+  ('-' | '"-"' | DQS:referrer)
+  ('-' | '"-"' | DQS:user_agent)
+  ('-' | LD:version_id)
+  ( // optional fields
+	('-' | LD:host_id)
+    ('-' | LD:signature_version)
+    ('-' | LD:chiper_suite)
+    ('-' | LD:authentication_type)
+    ('-' | LD:host_header)
+    ('-' | LD:tls_version)
+  )(fs=' ')?
+)(fs=' ') EOL
