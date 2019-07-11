@@ -14,8 +14,8 @@ TIMESTAMP('yyyy-MM-ddTHH:mm:ss.SSSSSSZ'):timestamp
 ' ' (('-' | INT:target_status_code))
 ' ' LONG:received_bytes
 ' ' LONG:sent_bytes
-' ' DQS:request
-' ' DQS{0,8200}:user_agent // 8kB + bit more.
+' ' (('"- - - "' | ('"' LD:request_verb ' ' LD:uri ' ' LD:protocol '"')))
+' ' (('"-"' | DQS{0,8200}:user_agent)) // 8kB
 ' ' (('-' | LD:ssl_cipher))
 ' ' (('-' | LD:ssl_protocol))
 (
