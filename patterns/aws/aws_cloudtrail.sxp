@@ -17,17 +17,17 @@ JSON{
 	STRING:invokedBy,
 	STRING:accessKeyId,
 	STRING:userName,
-	{
-	  {
-	    STRING:mfaAuthenticated,
-		TIMESTAMP('yyyy-MM-ddTHH:mm:ssZ'):creationDate
+    {
+      {
+        STRING:mfaAuthenticated,
+        TIMESTAMP('yyyy-MM-ddTHH:mm:ssZ'):creationDate
 	  }(greedy='other'):attributes,
 	  {
-	    STRING:type,
-		STRING:principalId,
-		STRING:arn,
-		STRING:accountId,
-		STRING:userName
+        STRING:type,
+        STRING:principalId,
+        STRING:arn,
+        STRING:accountId,
+        STRING:userName
 	  }(greedy='other'):sessionIssuer,
 	  {}:webIdFederationData // undocumented
 	}(greedy='other'):sessionContext
