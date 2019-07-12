@@ -1,0 +1,58 @@
+/*
+ SpectX pattern for Amazon AWS Cloud Trail Log Format parsing.
+ https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-log-file-examples.html
+*/
+
+(BOS '{"Records":' SPACE* '[')?
+JSON{
+  TIMESTAMP('yyyy-MM-ddTHH:mm:ssZ')+:eventTime,
+  STRING:eventSource,
+  STRING:eventName,
+  STRING:awsRegion,
+  {
+    STRING:type,
+	STRING:principalId,
+	STRING:arn,
+	STRING:accountId,
+	STRING:invokedBy,
+	STRING:accessKeyId,
+	STRING:userName,
+	{
+	  {
+	    STRING:mfaAuthenticated,
+		TIMESTAMP('yyyy-MM-ddTHH:mm:ssZ'):creationDate
+	  }(greedy='other'):attributes,
+	  {
+	    STRING:type,
+		STRING:principalId,
+		STRING:arn,
+		STRING:accountId,
+		STRING:userName
+	  }(greedy='other'):sessionIssuer,
+	  {}:webIdFederationData // undocumented
+	}(greedy='other'):sessionContext
+  }(greedy='other')+:userIdentity,
+  IPADDR:sourceIPAddress,
+  STRING:userAgent,
+  {}:requestParameters,
+  STRING:responseElements,
+  STRING:additionalEventData,
+  STRING:requestID,
+  STRING:eventID,
+  STRING:eventType,
+  STRING:recipientAccountId,
+  STRING:vpcEndpointId,
+  STRING:errorCode,
+  STRING:errorMessage,
+  STRING:apiVersion,
+  STRING:managementEvent,
+  BOOLEAN:readOnly,
+  {
+  	STRING:ARN,
+	STRING:accountId,
+	STRING:type
+  }[]:resources,
+  STRING:sharedEventID,
+  FLOAT:eventVersion
+}(flat=true, greedy='other')
+(',' | (']}' EOF))
