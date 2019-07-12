@@ -1,14 +1,9 @@
-/*
- SpectX pattern for Amazon AWS Cloud Trail Log Format parsing.
- https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-log-file-examples.html
-*/
-
 (BOS '{"Records":' SPACE* '[')?
 JSON{
   TIMESTAMP('yyyy-MM-ddTHH:mm:ssZ')+:eventTime,
-  STRING:eventSource,
-  STRING:eventName,
-  STRING:awsRegion,
+  STRING+:eventSource,
+  STRING+:eventName,
+  STRING+:awsRegion,
   {
     STRING:type,
 	STRING:principalId,
@@ -32,7 +27,7 @@ JSON{
 	  {}:webIdFederationData // undocumented
 	}(greedy='other'):sessionContext
   }(greedy='other')+:userIdentity,
-  IPADDR:sourceIPAddress,
+  ((IPADDR:addr | STRING):name):sourceIPAddress,
   STRING:userAgent,
   {}:requestParameters,
   STRING:responseElements,
