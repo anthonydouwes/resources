@@ -1,3 +1,8 @@
+/*
+ SpectX pattern for Amazon AWS Cloud Trail Log Format parsing.
+ https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-log-file-examples.html
+*/
+
 (BOS '{"Records":' SPACE* '[')?
 JSON{
   TIMESTAMP('yyyy-MM-ddTHH:mm:ssZ')+:eventTime,
