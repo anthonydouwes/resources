@@ -1,0 +1,79 @@
+$dissectDns(bytes) = CREATE FUNCTION(
+  language:'javascript', 
+  library:['./pcap-dns-dissect.js'],
+  returns:{txId:0, 
+		  flags:0,
+  		  opCode:0,
+		  isQuery:false,
+		  isAuthoritative:false,
+		  isTruncated:false,
+		  recursionDesired:false,
+		  recursionAvailable:false,
+		  rCode:0,
+		  questionCnt:0, 
+		  answerCnt:0, 
+		  authorityCnt:0, 
+		  additionalCnt:0,
+		  queries:[{qType:0,qClass:0,qName:""}],
+		  answers:[{name:"", type:-1, class:-1, ttl:-1, rdata:""}]
+		 },
+  code: "return dissectDnsMessage(bytes);"
+);
+
+$getRRType(typeId) = 
+ CASE
+  WHEN $typeId = 1 THEN "A"
+  WHEN $typeId = 5 THEN "CNAME"
+  WHEN $typeId = 6 THEN "SOA"
+  WHEN $typeId = 12 THEN "PTR"
+  WHEN $typeId = 15 THEN "MX"
+  WHEN $typeId = 16 THEN "SOA"
+  WHEN $typeId = 17 THEN "RP"
+  WHEN $typeId = 18 THEN "AFSDB"
+  WHEN $typeId = 24 THEN "SIG"
+  WHEN $typeId = 25 THEN "KEY"
+  WHEN $typeId = 28 THEN "AAAA"
+  ELSE "unknown"
+ END
+;
+
+$getClassType(typeId) = 
+ CASE
+  WHEN $typeId = 1 THEN "IN"
+  WHEN $typeId = 3 THEN "CH"
+  WHEN $typeId = 4 THEN "HS"
+  WHEN $typeId = 254 THEN "NONE"
+  WHEN $typeId = 255 THEN "ANY"
+  ELSE "unknown"
+ END
+;
+
+$getResponse(code) = 
+ CASE
+  WHEN $code = 0 THEN "NoError"
+  WHEN $code = 1 THEN "FormErr"
+  WHEN $code = 2 THEN "ServFail"
+  WHEN $code = 3 THEN "NXDomain"
+  WHEN $code = 4 THEN "NotImp"
+  WHEN $code = 5 THEN "Refused"
+  WHEN $code = 6 THEN "YXDomain"
+  WHEN $code = 7 THEN "YXRRSet"
+  WHEN $code = 8 THEN "NXRRSet"
+  WHEN $code = 9 THEN "NotAuth"
+  WHEN $code = 10 THEN "NotZone"
+  WHEN $code = 11 THEN "DSOTYPENI"
+  WHEN $code = 16 THEN "BADVERS"
+  WHEN $code = 17 THEN "BADKEY"
+  WHEN $code = 18 THEN "BADTIME"
+  WHEN $code = 19 THEN "BADMODE"
+  WHEN $code = 20 THEN "BADNAME"
+  WHEN $code = 21 THEN "BADALG"
+  WHEN $code = 22 THEN "BADTRUNC"
+  WHEN $code = 23 THEN "BADCOOKIE"
+  ELSE "unknown"
+ END
+;
+
+$getRdata(str) = 
+  PARSE("(IPADDR:address | (LD:cname EOS))", $str)
+;
