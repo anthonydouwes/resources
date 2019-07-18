@@ -8,7 +8,7 @@ include "./dns-udf.sx";
  .select(*, data:$dissectDns(_raw_bytes))           //parse DNS payload
  .select(*, query:UNNEST(data[queries]),            //since Query and Answer sections contain array
 		 answer:UNNEST(data[answers]))              //expand them to rows
- .filter(answer is not NULL)                        //leave only records with both query and answer data
+ .filter(answer is not NULL)                        //include records with both query and answer data
 ;
 
 @normalize = @dns
