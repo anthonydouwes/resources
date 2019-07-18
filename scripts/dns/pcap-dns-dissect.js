@@ -74,16 +74,16 @@ function dissectDnsMessage(bytes) {
 function getAnswers(buf) {
   var ret = new Object();
   var p = (((buf[offset]<<8)&0x3f00) | buf[offset+1]&0x00ff) + base; offset += 2;
-  ret.name = getName(p, buf);
-  
+  ret.name = getName(p, buf, 0);
+
   ret.type = (((buf[offset]<<8)&0xff00) | buf[offset+1]&0x00ff); offset += 2;
   ret.class = (((buf[offset]<<8)&0xff00) | buf[offset+1]&0x00ff); offset += 2;
-  ret.ttl = ( ((buf[offset]<<24)&0xff000000) 
-			 | ((buf[offset+1]<<16)&0xff0000) 
-			 | ((buf[offset+2]<<8)&0xff00) 
-			 | (buf[offset+3]&0xff) 
+  ret.ttl = ( ((buf[offset]<<24)&0xff000000)
+			 | ((buf[offset+1]<<16)&0xff0000)
+			 | ((buf[offset+2]<<8)&0xff00)
+			 | (buf[offset+3]&0xff)
 			); offset += 4;
-  var rdLen = (((buf[offset]<<8)&0xff00) | buf[offset+1]&0x00ff); offset += 2;  
+  var rdLen = (((buf[offset]<<8)&0xff00) | buf[offset+1]&0x00ff); offset += 2;
   ret.address = "";
 
   if(ret.type == 1) //IPv4
@@ -93,7 +93,7 @@ function getAnswers(buf) {
   else if(ret.type == 28) //IPv6
 	ret.rdata = getIpv6Str(offset, buf, rdLen);
 
-  offset += rdLen;  
+  offset += rdLen;
   return ret;
 }
 
@@ -106,7 +106,7 @@ function getQueries(buf) {
 	for(var i=offset; i<offset+slen;i++) {
 	  label.push(buf[i] >= 0x20 && buf[i] < 0x7f ? String.fromCharCode(buf[i]) : '.');
 	}
-	question.push(label.join("")); 
+	question.push(label.join(""));
 	offset += slen;
   }
   var ret = new Object();
@@ -118,8 +118,11 @@ function getQueries(buf) {
   return ret;
 }
 
-function getName(pos, buf) {
+function getName(pos, buf, depth) {
   var question = [];
+  if(depth > 10) {
+	return "Name contains pointer that loops";
+  }
   while((pos < limit)) {
 	var slen = (buf[(pos)]&0xff); pos++;
 	var label = [];
@@ -127,24 +130,25 @@ function getName(pos, buf) {
 	  break;  // stop processing after last label
 	  } else if ((slen&0xc0)!=0) { //referred label
 		newPos = (((slen<<8)&0x3f00) | buf[pos]&0x00ff) + base;
-		question.push(getName(newPos, buf));
+		var nDepth = depth + 1;
+		question.push(getName(newPos, buf, nDepth));
 	  break;
 	}
   	for(var i=pos; i<pos+slen;i++) {
 	  label.push(buf[i] >= 0x20 && buf[i] < 0x7f ? String.fromCharCode(buf[i]) : '.');
 	}
-	question.push(label.join("")); 
+	question.push(label.join(""));
 	pos += slen;
   }
   return question.join(".");
 }
-  
+
 function getIpv4Str(pos, buf, len) {
   var ret = [];
   for(i=pos; i<pos+len;i++) {
 	ret.push((buf[i]&0xff).toString());
   }
-  return ret.join(".");  
+  return ret.join(".");
 }
 
 function getIpv6Str(pos, buf, len) {
@@ -152,7 +156,7 @@ function getIpv6Str(pos, buf, len) {
   for(i=pos; i<pos+len;i+=2) {
 	ret.push( pad((buf[i]&0xff).toString(16),2) + pad((buf[i+1]&0xff).toString(16),2));
   }
-  return ret.join(":");  
+  return ret.join(":");
 }
 
 function pad(num, size) {
@@ -161,13 +165,13 @@ function pad(num, size) {
   return s;
 }
 
-/* computes payload offset in buf 
+/* computes payload offset in buf
    returns true if payload exists.
 */
 function processHdr(buf) {
   var ethFrameType = (((buf[28]<<8)&0xff00) | buf[29]&0x00ff);
 
-  var ipHdrLen = 20; 
+  var ipHdrLen = 20;
   var ipProto = 17;		//UDP
   var vlanHdrLen = 0;
   var ipProtoHdrLen = 8 //UDP header is 8 bytes
@@ -178,17 +182,17 @@ function processHdr(buf) {
 	ipProto = buf[36]&0xff;
   } else if (ethFrameType == 0x800) {  //IPv4
 	ipProto = buf[39]&0xff;
-  } 
-  
+  }
+
   if (ethFrameType == 8100) {//VLAN
 	vlanHdrLen = 4;
   }
-  
+
 
   if(ipProto == 6) {	//TCP
 	ipProtoHdrLen = (((buf[62]>>4)&0xf) * 4) + 2;
   }
-  
+
   base = 16  		//ts_sec, ts_usec, incl_len, orig_len
     + 12 			//srcMac, dstMac
     + 2 			//ethFrameType
@@ -203,10 +207,6 @@ function processHdr(buf) {
   if(ipProto == 6) {
 	ret = (buf[63]&0x08) != 0  //when ip proto is TCP return true only if PUSH tcp flag set
   }
-  console.log("ethFrameType: " + ethFrameType.toString(16) + " ipProto: " + ipProto.toString(16) 
-			  + " ipHdrLen: " + ipHdrLen.toString() + " protoHdrLen: " + ipProtoHdrLen.toString()
-			  + " base: " + base.toString() + " ret: " + ret
-			 );
+
   return ret;
 }
-
