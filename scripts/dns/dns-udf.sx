@@ -1,4 +1,4 @@
-$dissectDns(bytes) = CREATE FUNCTION(
+$dissectDns(bytes, captureLen) = CREATE FUNCTION(
   language:'javascript', 
   library:['./pcap-dns-dissect.js'],
   returns:{txId:0, 
@@ -17,7 +17,7 @@ $dissectDns(bytes) = CREATE FUNCTION(
 		  queries:[{qType:0,qClass:0,qName:""}],
 		  answers:[{name:"", type:-1, class:-1, ttl:-1, rdata:""}]
 		 },
-  code: "return dissectDnsMessage(bytes);"
+  code: "return dissectDnsMessage(bytes, captureLen);"
 );
 
 $getRRType(typeId) = 

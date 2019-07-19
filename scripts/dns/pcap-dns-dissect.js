@@ -10,8 +10,8 @@ var base;    //dns section position
 var offset;  //current position in the dns block 
 var limit;   //total pcap block size
 
-function dissectDnsMessage(bytes) {
-  var hasData = processHdr(bytes);
+function dissectDnsMessage(bytes, len) {
+  var hasData = processHdr(bytes, len);
   
   if(!hasData){
 	return {txId:-1, 
@@ -31,14 +31,14 @@ function dissectDnsMessage(bytes) {
 			answers:[]
 		   };	
   }
-  
-  var txId = (((bytes[offset]<<8)&0xff00) | bytes[offset+1]&0x00ff); offset += 2;
-  var flags = (((bytes[offset]<<8)&0xff00) | bytes[offset+1]&0x00ff); offset += 2;
-  var questionCnt = (((bytes[offset]<<8)&0xff00) | bytes[offset+1]&0x00ff); offset += 2;
-  var answerRRCnt = (((bytes[offset]<<8)&0xff00) | bytes[offset+1]&0x00ff); offset += 2;
-  var authorityRRCnt = (((bytes[offset]<<8)&0xff00) | bytes[offset+1]&0x00ff); offset += 2;
-  var additionalRRCnt = (((bytes[offset]<<8)&0xff00) | bytes[offset+1]&0x00ff); offset += 2;
-
+  if(limit >= offset+12) {
+	var txId = (((bytes[offset]<<8)&0xff00) | bytes[offset+1]&0x00ff); offset += 2;
+	var flags = (((bytes[offset]<<8)&0xff00) | bytes[offset+1]&0x00ff); offset += 2;
+	var questionCnt = (((bytes[offset]<<8)&0xff00) | bytes[offset+1]&0x00ff); offset += 2;
+	var answerRRCnt = (((bytes[offset]<<8)&0xff00) | bytes[offset+1]&0x00ff); offset += 2;
+	var authorityRRCnt = (((bytes[offset]<<8)&0xff00) | bytes[offset+1]&0x00ff); offset += 2;
+	var additionalRRCnt = (((bytes[offset]<<8)&0xff00) | bytes[offset+1]&0x00ff); offset += 2;
+  }
   var opCode = (flags>>11)&0xf;
 
   var qArray = [];
@@ -73,19 +73,23 @@ function dissectDnsMessage(bytes) {
 
 function getAnswers(buf) {
   var ret = new Object();
+  ret.address = "";
+  
+  if((offset + 8) > limit) return ret;
+
   var p = (((buf[offset]<<8)&0x3f00) | buf[offset+1]&0x00ff) + base; offset += 2;
   ret.name = getName(p, buf, 0);
-
+  
   ret.type = (((buf[offset]<<8)&0xff00) | buf[offset+1]&0x00ff); offset += 2;
   ret.class = (((buf[offset]<<8)&0xff00) | buf[offset+1]&0x00ff); offset += 2;
-  ret.ttl = ( ((buf[offset]<<24)&0xff000000)
-			 | ((buf[offset+1]<<16)&0xff0000)
-			 | ((buf[offset+2]<<8)&0xff00)
-			 | (buf[offset+3]&0xff)
+  ret.ttl = ( ((buf[offset]<<24)&0xff000000) 
+			 | ((buf[offset+1]<<16)&0xff0000) 
+			 | ((buf[offset+2]<<8)&0xff00) 
+			 | (buf[offset+3]&0xff) 
 			); offset += 4;
-  var rdLen = (((buf[offset]<<8)&0xff00) | buf[offset+1]&0x00ff); offset += 2;
-  ret.address = "";
-
+  var rdLen = (((buf[offset]<<8)&0xff00) | buf[offset+1]&0x00ff); offset += 2;  
+  if(offset + rdLen > limit) return ret;
+  
   if(ret.type == 1) //IPv4
 	ret.rdata = getIpv4Str(offset, buf, rdLen);
   else if(ret.type == 5) //CNAME
@@ -93,7 +97,7 @@ function getAnswers(buf) {
   else if(ret.type == 28) //IPv6
 	ret.rdata = getIpv6Str(offset, buf, rdLen);
 
-  offset += rdLen;
+  offset += rdLen;  
   return ret;
 }
 
@@ -106,20 +110,21 @@ function getQueries(buf) {
 	for(var i=offset; i<offset+slen;i++) {
 	  label.push(buf[i] >= 0x20 && buf[i] < 0x7f ? String.fromCharCode(buf[i]) : '.');
 	}
-	question.push(label.join(""));
+	question.push(label.join("")); 
 	offset += slen;
   }
   var ret = new Object();
-
-  ret.qType = (((buf[offset]<<8)&0xff00) | buf[offset+1]&0x00ff); offset += 2;
-  ret.qClass = (((buf[offset]<<8)&0xff00) | buf[offset+1]&0x00ff); offset += 2;
+  if(offset <= limit) {
+	ret.qType = (((buf[offset]<<8)&0xff00) | buf[offset+1]&0x00ff); offset += 2;
+	ret.qClass = (((buf[offset]<<8)&0xff00) | buf[offset+1]&0x00ff); offset += 2;	
+  }
   ret.qName = question.join(".");
 
   return ret;
 }
 
 function getName(pos, buf, depth) {
-  var question = [];
+  var ret = [];
   if(depth > 10) {
 	return "Name contains pointer that loops";
   }
@@ -128,35 +133,37 @@ function getName(pos, buf, depth) {
 	var label = [];
 	if(slen == 0) {
 	  break;  // stop processing after last label
-	  } else if ((slen&0xc0)!=0) { //referred label
-		newPos = (((slen<<8)&0x3f00) | buf[pos]&0x00ff) + base;
+	} else if ((slen&0xc0)!=0) { //referred label in compressed message
+	  newPos = (((slen<<8)&0x3f00) | buf[pos]&0x00ff) + base;
+	  if(newPos < limit) {
 		var nDepth = depth + 1;
-		question.push(getName(newPos, buf, nDepth));
+		ret.push(getName(newPos, buf, nDepth));		  
+	  }
 	  break;
 	}
-  	for(var i=pos; i<pos+slen;i++) {
+  	for(var i=pos; i<pos+slen && i<limit;i++) {
 	  label.push(buf[i] >= 0x20 && buf[i] < 0x7f ? String.fromCharCode(buf[i]) : '.');
 	}
-	question.push(label.join(""));
+	ret.push(label.join("")); 
 	pos += slen;
   }
-  return question.join(".");
+  return ret.join(".");
 }
-
+  
 function getIpv4Str(pos, buf, len) {
   var ret = [];
-  for(i=pos; i<pos+len;i++) {
+  for(i=pos; i<(pos+len) && i<limit;i++) {
 	ret.push((buf[i]&0xff).toString());
   }
-  return ret.join(".");
+  return ret.join(".");  
 }
 
 function getIpv6Str(pos, buf, len) {
   var ret = [];
-  for(i=pos; i<pos+len;i+=2) {
+  for(i=pos; i<(pos+len) && i<limit;i+=2) {
 	ret.push( pad((buf[i]&0xff).toString(16),2) + pad((buf[i+1]&0xff).toString(16),2));
   }
-  return ret.join(":");
+  return ret.join(":");  
 }
 
 function pad(num, size) {
@@ -165,48 +172,47 @@ function pad(num, size) {
   return s;
 }
 
-/* computes payload offset in buf
+/* computes payload offset in buf 
    returns true if payload exists.
 */
-function processHdr(buf) {
-  var ethFrameType = (((buf[28]<<8)&0xff00) | buf[29]&0x00ff);
-
-  var ipHdrLen = 20;
-  var ipProto = 17;		//UDP
+function processHdr(buf, captureLen) {
+  limit = captureLen + 16; //+pcap header len;
+  
+  if(limit < 58) //min len of IPv4 UDP
+	return false;
+  	  
+  var nwHdrType = (((buf[28]<<8)&0xff00) | buf[29]&0x00ff);
+  var nwHdrLen = 20;    //default IPv4 hdr, length 20 bytes
   var vlanHdrLen = 0;
-  var ipProtoHdrLen = 8 //UDP header is 8 bytes
+  var trlProto = 17;	//transport layer proto default UDP
+  var trlHdrLen = 8; 	//transport layer header length default: UDP header is 8 bytes
 
-
-  if(ethFrameType == 0x86dd) { //IPv6
-	ipHdrLen = 40;
-	ipProto = buf[36]&0xff;
-  } else if (ethFrameType == 0x800) {  //IPv4
-	ipProto = buf[39]&0xff;
-  }
-
-  if (ethFrameType == 8100) {//VLAN
+  if(nwHdrType == 0x86dd) { //IPv6
+	nwHdrLen = 40;			//IPV6 network layer header is 40 bytes
+	trlProto = buf[36]&0xff;
+  } else if (nwHdrType == 0x800) {  //IPv4
+	trlProto = buf[39]&0xff;
+  } 
+  
+  if (nwHdrType == 8100) {//VLAN
 	vlanHdrLen = 4;
   }
-
-
-  if(ipProto == 6) {	//TCP
-	ipProtoHdrLen = (((buf[62]>>4)&0xf) * 4) + 2;
+  
+  if(trlProto == 6 && limit >= 65) {	//TCP
+	trlHdrLen = (((buf[62]>>4)&0xf) * 4);
   }
-
-  base = 16  		//ts_sec, ts_usec, incl_len, orig_len
-    + 12 			//srcMac, dstMac
-    + 2 			//ethFrameType
+  
+  base = 16  		//tcpdump hdr: ts_sec, ts_usec, incl_len, orig_len
+    + 14 			//link-layer header: srcMac 6, dstMac 6, nwHdrType 2 bytes
     + vlanHdrLen	//vlan labels
-	+ ipHdrLen 		//IPV6 ip header is 40 bytes, IPV4 header is 20 bytes
-    + ipProtoHdrLen	//UDP header is 8 bytes
+	+ nwHdrLen 		
+    + trlHdrLen
   ;
+
+  if(trlProto == 6 && limit > base)	
+	base += 2; //skip payload length in case of TCP 
+  
   offset = base;
-  limit = buf.length;
-
-  var ret = true;
-  if(ipProto == 6) {
-	ret = (buf[63]&0x08) != 0  //when ip proto is TCP return true only if PUSH tcp flag set
-  }
-
-  return ret;
+  return (limit-base) > 0;
 }
+
