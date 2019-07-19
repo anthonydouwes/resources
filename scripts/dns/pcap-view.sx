@@ -5,7 +5,7 @@ include "./dns-udf.sx";
 
 @dns = @stream
  .filter((PORT(ipDst) = 53 or PORT(ipSrc) = 53))    //select only DNS traffic
- .select(*, data:$dissectDns(_raw_bytes))           //parse DNS payload
+ .select(*, data:$dissectDns(_raw_bytes, captureLen))  //parse DNS payload
  .select(*, query:UNNEST(data[queries]),            //since Query and Answer sections contain array
 		 answer:UNNEST(data[answers]))              //expand them to rows
  .filter(answer is not NULL)                        //include records with both query and answer data
