@@ -5,10 +5,10 @@ include "./dns-udf.sx";
 
 @dns = @stream
  .filter((PORT(ipDst) = 53 or PORT(ipSrc) = 53))    //select only DNS traffic
- .select(*, data:$dissectDns(_raw_bytes, captureLen))  //parse DNS payload
+ .select(*, data:$parseDnsMessage(_raw_bytes))      //parse DNS payload
  .select(*, query:UNNEST(data[queries]),            //since Query and Answer sections contain array
-		 answer:UNNEST(data[answers]))              //expand them to rows
- .filter(answer is not NULL)                        //include records with both query and answer data
+		   answer:UNNEST(data[answers]))            //expand them to rows
+ .filter(answer is not NULL)                        //leave only records with both query and answer data
 ;
 
 @normalize = @dns
@@ -17,16 +17,15 @@ include "./dns-udf.sx";
    ,clientIp:IPADDR(ipSrc)
    ,txId:data[txId]
    ,flags:data[flags]
-   ,opCode:data[opCode]
+   ,opCode:$getOpCode(data[opCode])
    ,authoritative:data[isAuthoritative]
    ,truncated:data[isTruncated]
    ,recursionDesired:data[recursionDesired]
    ,recursionAvailable:data[recursionAvailable]
    ,response:$getResponse(data[rCode])
    ,qType:$getRRType(query[qType])
-   ,qClass:$getClassType(query[qClass])
    ,qName:query[qName]
-   ,aName:answer[name]
+   ,qClass:$getClassType(query[qClass])
    ,rrType:$getRRType(answer[type])
    ,rrClass:$getClassType(answer[class])
    ,ttl:answer[ttl]

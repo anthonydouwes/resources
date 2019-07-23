@@ -1,6 +1,6 @@
-$dissectDns(bytes, captureLen) = CREATE FUNCTION(
+$parseDnsMessage(bytes) = CREATE FUNCTION(
   language:'javascript', 
-  library:['./pcap-dns-dissect.js'],
+  library:['./pcap-dns.js', './pcap-utils.js'],
   returns:{txId:0, 
 		  flags:0,
   		  opCode:0,
@@ -17,7 +17,7 @@ $dissectDns(bytes, captureLen) = CREATE FUNCTION(
 		  queries:[{qType:0,qClass:0,qName:""}],
 		  answers:[{name:"", type:-1, class:-1, ttl:-1, rdata:""}]
 		 },
-  code: "return dissectDnsMessage(bytes, captureLen);"
+  code: "return parseDnsMessage(bytes);"
 );
 
 $getRRType(typeId) = 
@@ -75,5 +75,17 @@ $getResponse(code) =
 ;
 
 $getRdata(str) = 
-  PARSE("(IPADDR:address | (LD:cname EOS))", $str)
+  PARSE("( (DATA* IPADDR:address DATA* EOS) | (DATA:data EOS))", $str)
+;
+
+$getOpCode(code) = 
+ CASE
+  WHEN $code = 0 THEN "Query"
+  WHEN $code = 1 THEN "IQuery"
+  WHEN $code = 2 THEN "Status"
+  WHEN $code = 4 THEN "Notify"
+  WHEN $code = 5 THEN "Update"
+  WHEN $code = 6 THEN "DSO"
+  ELSE "unknown"
+ END
 ;
