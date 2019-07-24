@@ -14,7 +14,7 @@ function parseDnsMessage(bytes) {
 
   // PcapPcaket provides convenience methods for handling pcap packet
   var packet = new PcapPacket(bytes);
-  if(!packet.hasData()){
+  if(!packet.hasData() || (packet.getSrcPort()!=53 && packet.getDstPort!=53)){
 	return {txId:-1, 
 			flags:-1,
 			opCode:-1,

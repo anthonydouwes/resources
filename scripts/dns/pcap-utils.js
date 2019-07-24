@@ -51,6 +51,8 @@ function PcapPacket(bytes) {
 			  + " payload size: " + (this.size-this.payloadOffset).toString()
 			  + " network type: " + (this.networkType==0x86dd?"IPv6":"IPv4")
 			  + " transport type: " + (this.transportType==6?"TCP":"UDP")
+			  + " srcPort: " + this.getSrcPort().toString()
+			  + " dstPort: " + this.getDstPort().toString()
 			 );
   }
   
@@ -61,6 +63,27 @@ function PcapPacket(bytes) {
   this.getTransportType = function() {
 	return this.transportType;
   }
+
+  this.getSrcPort = function() {
+	var trpHdrOffset = 
+		16 + 14 + 
+		(this.networkType==0x8100?2:0) +	//VLAN Q-tags
+		(this.networkType==0x86dd?40:20)	//network header
+	;
+	
+	return getShort(this.data, trpHdrOffset);
+  }
+
+  this.getDstPort = function() {
+	var trpHdrOffset = 
+		16 + 14 + 
+		(this.networkType==0x8100?2:0) +	//VLAN Q-tags
+		(this.networkType==0x86dd?40:20)	//network header
+	;
+	
+	return getShort(this.data, trpHdrOffset+2);
+  }
+
 
   /***************** private functions *****************/
 
@@ -75,7 +98,7 @@ function PcapPacket(bytes) {
 	  nwHdrLen = 40;			//IPV6 network layer header is 40 bytes
 	}
 
-	if (nwType == 8100) {//VLAN
+	if (nwType == 0x8100) {//VLAN (https://www.iana.org/assignments/ieee-802-numbers/ieee-802-numbers.xhtml)
 	  vlanFlagsLen = 2;
 	}
 
