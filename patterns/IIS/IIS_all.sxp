@@ -1,0 +1,27 @@
+// Fields: date+time s-sitename s-computername s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs-version cs(User-Agent) cs(Cookie) cs(Referer) cs-host sc-status sc-substatus sc-win32-status sc-bytes cs-bytes time-taken
+
+$time = TIMESTAMP('yyyy-MM-dd HH:mm:ss'):time;
+
+(('#' DATA) >> ($time ' ') )? 
+$time
+' ' LD:s_sitename					// The Internet service name and instance number that was running on the client.
+' ' LD:S_computername				// The name of the server on which the log file entry was generated.
+' ' IPADDR:s_ip ('%' LD:s_zone)?	// The IP address of the server on which the log file entry was generated.
+' ' [A-Z_]+:cs_method  				// The requested verb, for example, a GET method.
+' ' LD:cs_uri_stem 					// The target of the verb, for example, Default.htm.
+' ' ('-' | (LD:cs_uri_query)) 		// The query, if any, that the client was trying to perform. A Universal Resource Identifier (URI) query is necessary only for dynamic pages.
+' ' INT:s_port 						// The server port number that is configured for the service.
+' ' (('-') | (LD:cs_username)) 		// The name of the authenticated user that accessed the server. Anonymous users are indicated by a hyphen.
+' ' IPADDR:c_ip ('%' LD:c_zone)?	// The IP address of the client that made the request.
+' ' LD:cs_version					// The HTTP protocol version that the client used.
+' ' [! ]+:user_agent 				// The browser type that the client used.
+' ' ('-' | [! ]+:cs_cookie)			// The content of the cookie sent or received, if any.
+' ' ('-' | LD:referrer) 			// The site that the user last visited. This site provided a link to the current site.
+' ' LD:cs_host 						// The host header name, if any.
+' ' INT:sc_status					// The HTTP status code.	
+' ' INT:sc_substatus				// The substatus error code.	
+' ' LONG:sc_win32_status			// The Windows status code.	
+' ' LONG:sc_bytes					// The number of bytes sent by the server.
+' ' LONG:cs_bytes					// The number of bytes received and processed by the server.
+' ' LONG:time_taken					// The length of time that the action took, in milliseconds.
+(WINEOL|EOS)						// End of line
