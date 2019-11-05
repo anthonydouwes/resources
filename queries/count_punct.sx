@@ -1,4 +1,4 @@
-LIST(src:'https://raw.githubusercontent.com/spectx/resources/master/queries/sample_data.txt')
+LIST(src:'https://raw.githubusercontent.com/spectx/resources/master/queries/sample_data.txt') // replace with an uri to your own datastore. Creating a new datastore: https://docs.spectx.com/pages/user_manual/datastores.html#adding-new-datastore
 | PARSE(pattern:"LD:line EOL")                        // Parse the data into lines of text
 | select(punctuation:PUNCT(line, 80, false), *)     // Return punctuation within those strings within the first 80 characters. Include the false/true (keep spaces)
 // Return the first 16 (from 0 to 15) characters of the 'punctuation' field. count their ocurrence and aggregate. include the first and last sample of the aggregation. 
