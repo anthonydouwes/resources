@@ -1,0 +1,7 @@
+LIST(src:'sx:/user/sample_data.txt')
+| parse(pattern:"LD:line EOL")                        // Parse the data into lines of text
+| select(punctuation:PUNCT(line, 80, false), *)     // Return punctuation within those strings within the first 80 characters. Include the false/true (keep spaces)
+// Return the first 16 (from 0 to 15) characters of the 'punctuation' field. count their ocurrence and aggregate. include the first and last sample of the aggregation. 
+| select(punctuation:substr(punctuation, 0, 15), count(*), example1:first(line), example2:last(line)) //Play with different len's here: 15, 10, 25, ...
+| group(@1)
+| sort(count desc) 

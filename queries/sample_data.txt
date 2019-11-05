@@ -1,0 +1,262 @@
+aaaaaaaaa;31.10.16 15:13;141.76.45.35 [Germany];mail
+zxzxzx-33;21.12.16 18:26;94.186.122.214 [Latvia];www
+bbbbbbbbb;31.10.16 15:13;142.77.45.35 [Germany];mail
+xyxyxy-44;21.12.16 18:26;94.186.122.214 [Latvia];www
+Dec 31 16:53:53 server1 slapd[1010]: conn=7448 fd=43 connection from IP=192.168.4.36:40629 (IP=:: 389) accepted.
+Dec 31 16:53:53 server1 slapd[1010]: conn=7448 op=0 BIND dn="uid=user1,ou=people,dc=example,dc=com" method=128
+Dec 31 16:53:53 server1 slapd[1010]: conn=7448 op=0 RESULT tag=97 err=0 text=
+Dec 31 16:53:53 server1 slapd[1010]: conn=7448 op=1 SRCH base="ou=people,dc=example,dc=com" scope=2 filter="(objectClass=*)"
+Dec 31 16:53:53 server1 slapd[1010]: conn=7448 op=1 SEARCH RESULT tag=101 err=0 text=
+Dec 31 16:53:54 server1 slapd[1010]: conn=7448 op=2 UNBIND
+Dec 31 16:53:54 server1 slapd[1010]: conn=-1 fd=43 closed
+Dec 31 17:53:53 server1 slapd[1010]: conn=7448 fd=43 connection from IP=192.168.4.36:40629 (IP=:: 389) accepted.
+Dec 31 17:53:53 server1 slapd[1010]: conn=7448 op=0 BIND dn="uid=user1,ou=people,dc=example,dc=com" method=128
+Dec 31 17:53:53 server1 slapd[1010]: conn=7448 op=0 RESULT tag=97 err=0 text=
+Dec 31 17:53:53 server1 slapd[1010]: conn=7448 op=1 SRCH base="ou=people,dc=example,dc=com" scope=2 filter="(objectClass=*)"
+Dec 31 17:53:53 server1 slapd[1010]: conn=7448 op=1 SEARCH RESULT tag=101 err=0 text=
+Dec 31 17:53:54 server1 slapd[1010]: conn=7448 op=2 UNBIND
+Dec 31 17:53:54 server1 slapd[1010]: conn=-1 fd=43 closed
+Jan  1 05:00:14 server1 slapd[1010]: daemon: conn=7453 fd=48 connection from IP=192.168.2.104:40648 (IP=:: 278) accepted.
+Jan  1 05:00:14 server1 slapd[1010]: conn=7453 op=0 BIND dn="CN=MANAGER,DC=EXAMPLE,DC=COM" method=128
+Jan  1 05:00:14 server1 slapd[1010]: conn=7453 op=0 RESULT tag=97 err=0 text=
+Jan  1 05:00:14 server1 slapd[1010]: conn=7453 op=1 SRCH base="dc=example,dc=com" scope=2 filter="(uid=user1)"
+Jan  1 05:00:14 server1 slapd[1010]: conn=7453 op=1 SEARCH RESULT tag=101 err=0 text=
+Jan  1 05:00:14 server1 slapd[1010]: conn=7453 op=2 SRCH base="ou=Group,dc=example,dc=com" scope=1 filter="(&(objectClass=posixGroup)(|(memberUid=user1)(uniqueMember=uid=user1,ou=People,dc=example,dc=com)))"
+Jan  1 05:00:14 server1 slapd[1010]: conn=7453 op=2 SEARCH RESULT tag=101 err=0 text=
+Jan  1 05:00:14 server1 slapd[1010]: conn=7453 op=3 SRCH base="ou=People,dc=example,dc=com" scope=1 filter="(&(objectClass=shadowAccount)(uid=user1))"
+Jan  1 05:00:14 server1 slapd[1010]: conn=7453 op=3 SEARCH RESULT tag=101 err=0 text=
+Jan  1 05:00:15 server1 slapd[1010]: conn=7453 op=2 UNBIND
+Jan  1 05:00:15 server1 slapd[1010]: conn=-1 fd=48 closed
+Jan  1 06:00:14 server1 slapd[1010]: daemon: conn=7453 fd=48 connection from IP=192.168.2.104:40648 (IP=:: 278) accepted.
+Jan  1 06:00:14 server1 slapd[1010]: conn=7453 op=0 BIND dn="CN=MANAGER,DC=EXAMPLE,DC=COM" method=128
+Jan  1 06:00:14 server1 slapd[1010]: conn=7453 op=0 RESULT tag=97 err=0 text=
+Jan  1 06:00:14 server1 slapd[1010]: conn=7453 op=1 SRCH base="dc=example,dc=com" scope=2 filter="(uid=user1)"
+Jan  1 06:00:14 server1 slapd[1010]: conn=7453 op=1 SEARCH RESULT tag=101 err=0 text=
+Jan  1 06:00:14 server1 slapd[1010]: conn=7453 op=2 SRCH base="ou=Group,dc=example,dc=com" scope=1 filter="(&(objectClass=posixGroup)(|(memberUid=user1)(uniqueMember=uid=user1,ou=People,dc=example,dc=com)))"
+Jan  1 06:00:14 server1 slapd[1010]: conn=7453 op=2 SEARCH RESULT tag=101 err=0 text=
+Jan  1 06:00:14 server1 slapd[1010]: conn=7453 op=3 SRCH base="ou=People,dc=example,dc=com" scope=1 filter="(&(objectClass=shadowAccount)(uid=user1))"
+Jan  1 06:00:14 server1 slapd[1010]: conn=7453 op=3 SEARCH RESULT tag=101 err=0 text=
+Jan  1 06:00:15 server1 slapd[1010]: conn=7453 op=2 UNBIND
+Jan  1 06:00:15 server1 slapd[1010]: conn=-1 fd=48 closed
+2016-01-03 00:13:28 +0200	110.188.4.216	forerequest	200
+2016-01-06 06:35:24 +0200	48.242.116.66	unrioting	200
+2016-01-05 11:49:01 +0200	223.11.158.94	ribassano	404
+2016-01-04 15:26:43 +0200	133.68.108.44	overmelt	404
+2016-01-05 09:18:59 +0200	172.199.137.255	mathematic	404
+2016-01-06 22:57:07 +0200	250.8.73.159	spregiando	200
+2016-01-12 01:16:51 +0200	99.173.144.86	unartistlike	200
+2016-01-09 23:36:33 +0200	220.145.162.67	torticollis	404
+2015-12-22 22:15:13 +0200	112.190.142.126	blackwash	404
+2015-12-22 15:34:02 +0200	146.211.3.199	arbitrariamente	404
+2015-12-27 12:04:38 +0200	102.119.101.169	pantaphobia	404
+2015-12-26 07:00:48 +0200	1.38.101.207	trochantin	200
+2015-12-28 10:29:43 +0200	25.115.199.170	dictyogenous	404
+2015-12-27 08:21:10 +0200	175.132.253.128	arrestasti	404
+2015-12-29 19:10:32 +0200	125.4.57.186	passibility	404
+2015-12-27 15:50:45 +0200	100.145.20.139	leptospira	200
+2015-12-29 04:37:32 +0200	86.212.190.219	wkproxy	404
+2015-12-30 14:09:14 +0200	85.13.62.121	nonscraping	200
+2016-01-03 13:52:15 +0200	0.221.101.11	manifesti	200
+2016-01-03 00:30:18 +0200	123.82.76.124	innovator	200
+2016-01-14 15:36:55 +0200	71.154.82.242	inframedian	200
+2016-01-13 02:56:39 +0200	137.173.178.17	emulatress	200
+2016-01-11 16:07:04 +0200	152.92.186.18	yardage	404
+2016-01-14 04:07:01 +0200	161.73.128.232	fally	404
+2016-01-17 23:08:05 +0200	211.36.170.32	thermograd	200
+2016-01-18 19:07:22 +0200	187.245.221.188	stappavano	404
+2016-01-19 21:32:59 +0200	79.36.67.159	squab	200
+2016-01-21 14:47:13 +0200	246.184.83.102	bearcoot	404
+2016-01-18 12:50:27 +0200	135.137.243.213	liothrix	404
+2016-01-21 17:56:27 +0200	62.46.135.182	uninterrogable	404
+150.70.173.52 - - [14/Mar/2016:12:01:48 +0200] "GET / HTTP/1.1" 200 225 "-" "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0)"
+178.216.200.155 - - [14/Mar/2016:15:40:29 +0200] "GET http://testp5.mielno.lubin.pl/testproxy.php HTTP/1.1" 404 458 "-" "Mozilla/5.0 (Windows NT 5.1; rv:32.0) Gecko/20100101 Firefox/31.0"
+117.169.75.66 - - [14/Mar/2016:23:34:25 +0200] "GET //db/scripts/setup.php HTTP/1.1" 404 474 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:31 +0200] "GET //mysql/scripts/setup.php HTTP/1.1" 404 477 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:35 +0200] "GET //typo3/phpmyadmin/scripts/setup.php HTTP/1.1" 404 488 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:46 +0200] "GET //phpmyadmin1/scripts/setup.php HTTP/1.1" 404 483 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:46 +0200] "GET //phpmyadmin2/scripts/setup.php HTTP/1.1" 404 483 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:47 +0200] "GET //pma/scripts/setup.php HTTP/1.1" 404 475 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:47 +0200] "GET //web/phpMyAdmin/scripts/setup.php HTTP/1.1" 404 486 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:48 +0200] "GET //xampp/phpmyadmin/scripts/setup.php HTTP/1.1" 404 488 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:48 +0200] "GET //web/scripts/setup.php HTTP/1.1" 404 475 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:49 +0200] "GET //php-my-admin/scripts/setup.php HTTP/1.1" 404 484 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:49 +0200] "GET //websql/scripts/setup.php HTTP/1.1" 404 478 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:50 +0200] "GET //phpmyadmin/scripts/setup.php HTTP/1.1" 404 482 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:51 +0200] "GET //phpMyAdmin/scripts/setup.php HTTP/1.1" 404 482 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:51 +0200] "GET //phpMyAdmin-2/scripts/setup.php HTTP/1.1" 404 484 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:52 +0200] "GET //php-my-admin/scripts/setup.php HTTP/1.1" 404 484 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:52 +0200] "GET //phpMyAdmin-2.5.5/index.php HTTP/1.1" 404 480 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:34:53 +0200] "GET //phpMyAdmin-2.5.5-pl1/index.php HTTP/1.1" 404 484 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:36:55 +0200] "GET /muieblackcat HTTP/1.1" 404 466 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:36:56 +0200] "GET //scripts/setup.php HTTP/1.1" 404 471 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:36:56 +0200] "GET //admin/scripts/setup.php HTTP/1.1" 404 477 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:36:57 +0200] "GET //admin/pma/scripts/setup.php HTTP/1.1" 404 481 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:36:57 +0200] "GET //admin/phpmyadmin/scripts/setup.php HTTP/1.1" 404 488 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:01 +0200] "GET //dbadmin/scripts/setup.php HTTP/1.1" 404 479 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:02 +0200] "GET //myadmin/scripts/setup.php HTTP/1.1" 404 479 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:02 +0200] "GET //mysql/scripts/setup.php HTTP/1.1" 404 477 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:03 +0200] "GET //mysqladmin/scripts/setup.php HTTP/1.1" 404 482 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:03 +0200] "GET //typo3/phpmyadmin/scripts/setup.php HTTP/1.1" 404 488 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:04 +0200] "GET //phpadmin/scripts/setup.php HTTP/1.1" 404 480 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:04 +0200] "GET //phpMyAdmin/scripts/setup.php HTTP/1.1" 404 482 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:05 +0200] "GET //phpmyadmin/scripts/setup.php HTTP/1.1" 404 482 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:05 +0200] "GET //phpmyadmin1/scripts/setup.php HTTP/1.1" 404 483 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:06 +0200] "GET //phpmyadmin2/scripts/setup.php HTTP/1.1" 404 483 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:07 +0200] "GET //pma/scripts/setup.php HTTP/1.1" 404 475 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:07 +0200] "GET //web/phpMyAdmin/scripts/setup.php HTTP/1.1" 404 486 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:08 +0200] "GET //xampp/phpmyadmin/scripts/setup.php HTTP/1.1" 404 488 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:08 +0200] "GET //web/scripts/setup.php HTTP/1.1" 404 475 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:09 +0200] "GET //php-my-admin/scripts/setup.php HTTP/1.1" 404 484 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:09 +0200] "GET //websql/scripts/setup.php HTTP/1.1" 404 478 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:10 +0200] "GET //phpmyadmin/scripts/setup.php HTTP/1.1" 404 482 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:11 +0200] "GET //phpMyAdmin/scripts/setup.php HTTP/1.1" 404 482 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:11 +0200] "GET //phpMyAdmin-2/scripts/setup.php HTTP/1.1" 404 484 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:12 +0200] "GET //php-my-admin/scripts/setup.php HTTP/1.1" 404 484 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:12 +0200] "GET //phpMyAdmin-2.5.5/index.php HTTP/1.1" 404 480 "-" "-"
+117.169.75.66 - - [14/Mar/2016:23:37:13 +0200] "GET //phpMyAdmin-2.5.5-pl1/index.php HTTP/1.1" 404 484 "-" "-"
+192.30.252.45 - - [15/Mar/2016:01:08:31 +0200] "POST / HTTP/1.1" 200 225 "-" "GitHub-Hookshot/7a65dd9"
+209.126.230.71 - - [15/Mar/2016:01:56:19 +0200] "GET / HTTP/1.0" 200 244 "-" "StatsInfo"
+185.130.5.146 - - [15/Mar/2016:09:06:31 +0200] "HEAD / HTTP/1.1" 200 224 "-" "curl/7.38.0"
+54.187.59.101 - - [15/Mar/2016:11:36:57 +0200] "GET / HTTP/1.1" 200 244 "-" "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; InfoPath.2)"
+192.30.252.41 - - [15/Mar/2016:14:54:47 +0200] "POST / HTTP/1.1" 200 225 "-" "GitHub-Hookshot/7a65dd9"
+150.70.188.179 - - [15/Mar/2016:16:14:26 +0200] "GET / HTTP/1.1" 200 225 "-" "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0)"
+172.16.4.11 - - [15/Mar/2016:20:49:14 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=0 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:15 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=1 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:16 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=2 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:17 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=3 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:18 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=4 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:19 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=5 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:20 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=6 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:21 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=7 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:22 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=8 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:23 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=9 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:24 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=10 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:25 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=11 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:26 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=12 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:27 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=13 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:28 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=14 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:29 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=15 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:30 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=16 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:31 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=17 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:33 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=18 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:34 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=19 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:35 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=20 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:36 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=21 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:37 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=22 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:38 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=23 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:39 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=24 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:40 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=25 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:41 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=26 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:42 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=27 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:43 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=28 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:44 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=29 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:45 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=30 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:46 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=31 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:47 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=32 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:48 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=33 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:49 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=34 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:50 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=35 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:51 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=36 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:52 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=37 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:53 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=38 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:54 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=39 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:55 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=40 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:56 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=41 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:57 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=42 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:58 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=43 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:49:59 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=44 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:00 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=45 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:01 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=46 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:02 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=47 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:03 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=48 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:04 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=49 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:05 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=50 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:06 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=51 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:07 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=52 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:08 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=53 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:09 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=54 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:10 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=55 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:11 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=56 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:12 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=57 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:13 +0200] "GET /stb-check.txt?uptime=25.93&serial=M91545EEC439&attempts=58 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:15 +0200] "GET /stb-check.txt?uptime=86.55&serial=M91545EEC439&attempts=0 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:16 +0200] "GET /stb-check.txt?uptime=86.55&serial=M91545EEC439&attempts=1 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:17 +0200] "GET /stb-check.txt?uptime=86.55&serial=M91545EEC439&attempts=2 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:18 +0200] "GET /stb-check.txt?uptime=86.55&serial=M91545EEC439&attempts=3 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:19 +0200] "GET /stb-check.txt?uptime=86.55&serial=M91545EEC439&attempts=4 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:20 +0200] "GET /stb-check.txt?uptime=86.55&serial=M91545EEC439&attempts=5 HTTP/1.1" 404 478 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:21 +0200] "GET /stb-check.txt?uptime=86.55&serial=M91545EEC439&attempts=6 HTTP/1.1" 200 249 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:50:26 +0200] "GET /dtv-frontend-ott HTTP/1.1" 404 518 "-" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:20:52:54 +0200] "GET /stb-check.txt?uptime=25.74&serial=M91545EEC439&attempts=0 HTTP/1.1" 200 247 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:20:53:00 +0200] "GET /dtv-frontend-ott HTTP/1.1" 301 628 "-" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:20:53:00 +0200] "GET /dtv-frontend-ott/ HTTP/1.1" 200 428 "-" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+10.0.0.2 - - [15/Mar/2016:20:54:36 +0200] "GET /dtv-frontend-ott HTTP/1.1" 301 572 "-" "curl/7.35.0"
+10.0.0.2 - - [15/Mar/2016:20:54:38 +0200] "GET /dtv-frontend-ott/ HTTP/1.1" 200 353 "-" "curl/7.35.0"
+192.30.252.34 - - [15/Mar/2016:20:57:58 +0200] "POST / HTTP/1.1" 200 225 "-" "GitHub-Hookshot/7a65dd9"
+172.16.4.11 - - [15/Mar/2016:21:00:02 +0200] "GET /stb-check.txt?uptime=25.82&serial=M91545EEC439&attempts=0 HTTP/1.1" 200 247 "-" "Wget"
+192.168.0.0 - log
+poisoning
+attempt via auth field 
+ [15/Mar/2016:21:00:08 +0200] "GET / HTTP/1.1" 404 537 "-" "curl/7.34.2"
+172.16.4.11 - - [15/Mar/2016:21:00:08 +0200] "GET /dtv-frontend-ott HTTP/1.1" 301 628 "-" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:08 +0200] "GET /dtv-frontend-ott/ HTTP/1.1" 200 606 "-" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:08 +0200] "GET /dtv-frontend-v5.4.8/ HTTP/1.1" 200 1198 "http://inet-static.mw.elion.ee/dtv-frontend-ott/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:08 +0200] "GET /dtv-frontend-v5.4.8/style/main.css HTTP/1.1" 200 20517 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:08 +0200] "GET /dtv-frontend-v5.4.8/boot.js HTTP/1.1" 200 185268 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/volume_icon.png HTTP/1.1" 404 543 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/telia_loader.gif HTTP/1.1" 200 6488 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/volume_mute_icon.png HTTP/1.1" 404 549 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/local.js?_=1458068409922 HTTP/1.1" 404 529 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/shadows/shadow-1-r.png HTTP/1.1" 404 550 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-3d.png HTTP/1.1" 404 561 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/style/fonts/freesans.ttf HTTP/1.1" 404 546 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/platforms/motorola/PlatformBootstrapperMotorola.js?1458068409946 HTTP/1.1" 404 571 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-delete.png HTTP/1.1" 404 565 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-favourite.png HTTP/1.1" 404 568 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-folder.png HTTP/1.1" 404 565 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-hd.png HTTP/1.1" 404 561 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-locked.png HTTP/1.1" 404 566 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-notification.png HTTP/1.1" 404 572 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-notification-active.png HTTP/1.1" 404 578 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-play.png HTTP/1.1" 404 563 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-playback.png HTTP/1.1" 404 567 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-recordable.png HTTP/1.1" 404 569 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-recordable-active.png HTTP/1.1" 404 576 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-placeholder.png HTTP/1.1" 404 570 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-sd-hd.png HTTP/1.1" 404 564 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-hd-sd.png HTTP/1.1" 404 564 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-my-tv.png HTTP/1.1" 404 564 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:00:10 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-my-tv-active.png HTTP/1.1" 404 571 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+5.28.158.165 - - [15/Mar/2016:21:08:02 +0200] "GET / HTTP/1.0" 200 244 "-" "masscan/1.0 (https://github.com/robertdavidgraham/masscan)"
+172.16.4.11 - - [15/Mar/2016:21:09:41 +0200] "GET /stb-check.txt?uptime=25.75&serial=M91545EEC439&attempts=0 HTTP/1.1" 200 247 "-" "Wget"
+172.16.4.11 - - [15/Mar/2016:21:09:46 +0200] "GET /dtv-frontend-ott HTTP/1.1" 301 628 "-" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:46 +0200] "GET /dtv-frontend-ott/ HTTP/1.1" 200 606 "-" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:46 +0200] "GET /dtv-frontend-v5.4.8/ HTTP/1.1" 200 1198 "http://inet-static.mw.elion.ee/dtv-frontend-ott/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:46 +0200] "GET /dtv-frontend-v5.4.8/style/main.css HTTP/1.1" 200 20517 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:46 +0200] "GET /dtv-frontend-v5.4.8/boot.js HTTP/1.1" 200 185268 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:48 +0200] "GET /dtv-frontend-v5.4.8/images/telia_loader.gif HTTP/1.1" 200 6488 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:48 +0200] "GET /dtv-frontend-v5.4.8/images/volume_icon.png HTTP/1.1" 200 59212 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:48 +0200] "GET /dtv-frontend-v5.4.8/images/volume_mute_icon.png HTTP/1.1" 200 61049 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:48 +0200] "GET /dtv-frontend-v5.4.8/local.js?_=1458068988173 HTTP/1.1" 404 529 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:48 +0200] "GET /dtv-frontend-v5.4.8/images/shadows/shadow-1-r.png HTTP/1.1" 200 878 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:48 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-3d.png HTTP/1.1" 200 1772 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:48 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-delete.png HTTP/1.1" 200 1015 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:48 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-favourite.png HTTP/1.1" 200 941 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:48 +0200] "GET /dtv-frontend-v5.4.8/platforms/motorola/PlatformBootstrapperMotorola.js?1458068988198 HTTP/1.1" 200 9927 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:48 +0200] "GET /dtv-frontend-v5.4.8/style/fonts/freesans.ttf HTTP/1.1" 200 584072 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:48 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-folder.png HTTP/1.1" 200 613 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:48 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-hd.png HTTP/1.1" 200 614 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:49 +0200] "GET /dtv-frontend-v5.4.8/images/indicators/indicator-small-locked.png HTTP/1.1" 200 970 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:49 +0200] "GET /dtv-frontend-v5.4.8/modules/catchup/style/catchup.css?1458068988198 HTTP/1.1" 404 554 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:49 +0200] "GET /dtv-frontend-v5.4.8/modules/recordings/style/recordings.css?1458068988198 HTTP/1.1" 404 560 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:49 +0200] "GET /dtv-frontend-v5.4.8/modules/channels/style/channels.css?1458068988198 HTTP/1.1" 404 556 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:49 +0200] "GET /dtv-frontend-v5.4.8/modules/e-home/style/e-home.css?1458068988198 HTTP/1.1" 404 552 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:49 +0200] "GET /dtv-frontend-v5.4.8/modules/epg/style/epg.css?1458068988198 HTTP/1.1" 404 547 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:49 +0200] "GET /dtv-frontend-v5.4.8/modules/help/style/help.css?1458068988198 HTTP/1.1" 404 549 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:49 +0200] "GET /dtv-frontend-v5.4.8/modules/main-menu/style/main-menu.css?1458068988198 HTTP/1.1" 404 559 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:49 +0200] "GET /dtv-frontend-v5.4.8/modules/phone/style/phone.css?1458068988198 HTTP/1.1" 404 551 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:49 +0200] "GET /dtv-frontend-v5.4.8/modules/settings/style/settings.css?1458068988198 HTTP/1.1" 404 557 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:49 +0200] "GET /dtv-frontend-v5.4.8/modules/radio/style/radio.css?1458068988198 HTTP/1.1" 404 551 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:49 +0200] "GET /dtv-frontend-v5.4.8/modules/streamer/style/streamer.css?1458068988198 HTTP/1.1" 404 557 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:49 +0200] "GET /dtv-frontend-v5.4.8/modules/video-rental/style/video-rental.css?1458068988198 HTTP/1.1" 404 565 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
+172.16.4.11 - - [15/Mar/2016:21:09:49 +0200] "GET /dtv-frontend-v5.4.8/modules/childrens-corner/style/childrens-corner.css?1458068988198 HTTP/1.1" 404 573 "http://inet-static.mw.elion.ee/dtv-frontend-v5.4.8/" "Mozilla/5.0 (Linux) AppleWebKit/600.5 (KHTML, like Gecko) Ekioh/3.4.5-arris-3 Safari/600.5"
