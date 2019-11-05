@@ -1,3 +1,5 @@
+// Download SpectX  here: https://www.spectx.com/get-spectx
+
 LIST(src:'https://raw.githubusercontent.com/spectx/resources/master/queries/sample_data.txt') // Replace with an uri to your own datastore. Creating a new datastore: https://docs.spectx.com/pages/user_manual/datastores.html#adding-new-datastore
 | PARSE(pattern:"LD:line EOL")                        // Parse the data into lines of text
 | select(punctuation:PUNCT(line, 80, false), *)     // Return punctuation within those strings within the first 80 characters. Switch between the false/true (keep spaces)
