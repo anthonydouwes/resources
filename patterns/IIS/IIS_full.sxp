@@ -22,4 +22,4 @@ TIMESTAMP('yyyy-MM-dd HH:mm:ss'):date_time // The date and time on which the act
 ' ' LONG:sc_bytes					// The number of bytes sent by the server.
 ' ' LONG:cs_bytes					// The number of bytes received and processed by the server.
 ' ' LONG:time_taken					// The length of time that the action took, in milliseconds.
-(EOLWIN | EOS)						// End of line
+(EOLWIN | EOL)						// End of line
