@@ -1,0 +1,222 @@
+/* Notes on usage:
+   1) if needed adjust @src to point to location of bcdata.sx (view) or bcdata.sxt (table). The latter is faster to query. Note that view depends on pattern at current directory ./bluecoat-w3c-elff.sxp
+   2) to run a query uncomment executor statement at the end of each query
+   
+   Log files can be downloaded from http://log-sharing.dreamhosters.com/bluecoat_proxy_big.zip
+*/
+
+@src = @[./bcdata.sxt]; //declare variable @src referring to stored parsed data
+
+/*total number of requests:*/
+$totalRequests = 8130590;
+
+/* Let's take a look at requests dynamics: */
+@hourlyReq = @src                  //declare query using variable name @hourlyReq. Data from @src gets piped to next statement:
+| select(
+   dateTime[1 hour] as hourTrunc,  //truncate timestamp to hour precision, assign alias hourTrunc
+   count(*) as requests)           //calculate counts, assign alias requests
+| group(hourTrunc)                 //compute counts by hourTrunc groups
+;
+//@hourlyReq;
+/* We have approx a month worth of records (from April 4'th to May 7'th 2005). We can observe three distinct periods: first
+~10 days (5'th to 14'th April) with very little traffic (few tens of hourly requests), then a period of complete silence
+from 13'th to 27'th April and finally last 10 days with rapidly increasing traffic. Hmm ... It is very unlikely that such
+traffic increase is caused by some malicious activity unless it's DDOS. The latter should show convergence to very few
+targets, so its easy to verify. More likely hypothesis is that lab guys tested initial setup during first 10 days,
+then went on to improve it (or party?) and after 2 weeks they launched real thing. Ok, let's see what the target
+distribution is:
+*/
+
+@hourlyTargets = @src
+| select(
+   hourTrunc:dateTime[1 hour],   //truncate timestamp to hour precision, assign alias hourTrunc
+   cs_host,                      
+   count(*))                     //compute unique hourTrunc and cs_host pairs
+| group(@1, @2)                  //group by first and second position fields (hourTtrunc and cs_host)
+| select(hourTrunc, targets:count(*))    //compute the count of hosts per hourTrunc
+| group(@1)
+| join(@hourlyReq on left.hourTrunc = right.hourTrunc)
+| select(tHour:left.hourTrunc, targets, requests)
+;
+//@hourlyTargets;
+/*
+As we can see the number of target hosts follows clearly the same pattern as number of requests during "live" period.
+To be sure about it we can also compute the Pearson correlation coefficient between the two:
+*/
+@targetRequestCorr = @hourlyTargets
+| select(CORR(targets, requests))    //compute Pearson correlation coefficient
+;
+//@targetRequestCorr;
+/*
+which gives us **0.98** - i.e we see strong correlation between number of requests and number of different hosts. We can
+now safely rule out DDOS hypothesis.
+
+Next let's have a look at clients. Their distribution should give us some clue how the proxy is set up.
+*/
+@hourlyClients = @src
+| select(
+   hourTrunc:dateTime[1 hour],   //truncate timestamp to hour precision, assign alias hourTrunc
+   c_ip,                      
+   count(*))                     //compute unique hourTrunc and c_ip pairs
+| group(@1, @2)                  
+| select(hourTrunc, clients:count(*)) //count unique clients per hourTrunc
+| group(@1)
+| join(@hourlyReq on left.hourTrunc = right.hourTrunc)
+| join(@hourlyTargets on left.hourTrunc = right.tHour)
+| select(tHour:left.hourTrunc, clients, targets, requests)
+;
+//@hourlyClients;
+/*
+We can see constant chattering of few tens of requests per hour from few clients. This is mixed with occasional bursts of
+requests from still the same low number of clients. Considering that the number of targets remain low as well it then
+perhaps this is simulated traffic. Since the overall number of requests and targets is low we could look directly at
+requests from this period:
+*/
+
+@testPeriodRequests = @src
+| filter(dateTime >= T(2005,04,07,00,00,00) and dateTime < T(2005,04,07,23,59,59))
+| select(cs_host, cs_uri_path, count(*))
+| group(@1,@2)
+| sort(@3 desc)
+;
+//@testPeriodRequests;
+/* this looks very much like setup and testing related activities: updating McAfee AV engine, virus patterns, downloading and applying operating system updates, setting up BlueCoat, etc.
+
+The clients graph of the "live" period fits the waves of requests and targets distribution (requests are not shown for
+better visibility). Let's compute the correlation to be sure: */
+
+@clientRequestCorrelation = @hourlyClients
+| select(CORR(targets, requests))    //compute Pearson correlation coefficient
+;
+//@clientRequestCorrelation;
+/* 0.98 again.Considering quite high number of both clients and target hosts this looks like real live traffic.
+I wonder from which countries it is though. And let's see how the countries are contributing to day (8am - 4pm )and night time (4pm - 8am) traffic:
+*/
+
+@hourlyCC = @src
+| select(ccIP:cc(c_ip), 
+		 dayTime:count(HOUR(dateTime)>8 and HOUR(dateTime)<16), 
+		 nightTime:count(HOUR(dateTime)<=8 or HOUR(dateTime)>=16))
+| group(@1)
+// | sort(@2 desc)
+;
+//@hourlyCC;
+
+/* Top 5 seem to make the vast majority of traffic. Biggest share is from ip addresses with unknown country. Internal addresses? 
+   Let's see traffic from class A networks: */
+   
+@top5Aclass = @src
+| select(c_ip & 0xFF000000l as network, requests:count(*))    //compute count by /8 network
+| group(@1)
+| sort(@2 desc)
+| select(*, percentage:(DOUBLE(requests)/$totalRequests)*100) //compute the percentage of total
+| limit(5)
+;
+//@top5Aclass;
+/*Funny that 98.4% of traffic originates from 45.0.0.0/8 range, which in 2005 belonged to company Interop Show Network (www.interop.com). 
+  And coincidentally NetWorld(SM)+Interop(R) 2005 conference was held May 1-6, 2005 at the Mandalay Bay Convention Center in Las Vegas. 
+  (https://www.businesswire.com/news/home/20041207005103/en/NetworldInterop-2005-Showcase-Largest-Assembly-Exhibitors-North).
+  Did Honeynet guys set up their proxy to intercept conference traffic? 
+  Requests graph @hourlyReq is computed with timezone set to GMT, which gives us activity increase at nighttime. When changing timezone to PST
+  (that's where Las Vegas happens to be) then we observe activity starting to increase at 6-7 am and at 7pm it has come down to nightly level.
+  Looks like normal human behaviour to me.
+
+  What does BlueCoat content filtering say? If it was a computer and information technology related event we should see Computers/Internet in top5:
+*/
+
+@contentFilter = @src | select(sc_filter_category, count(*)) | group(@1) | sort(@2 desc) | limit(15);
+//@contentFilter;
+/* sure enough we do. As well as Business, Economy, News and Email in prominent positions. And porn is there too, at 13'th place. In my opinion 
+   porn is good indicator of human behaviour - I have never seen a bot or trojan showing any interest in it. Let's have a look, what is the
+   favourite time for enjoying this sort of entertainment: */
+@hourlyPorn = @src
+| select(   
+   hourTrunc:dateTime[1 hour],   //truncate timestamp to hour precision, assign alias hourTrunc
+   pornCnt:count(sc_filter_category = 'Pornography'),
+   total:count(*))
+| group(@1)
+;
+//@hourlyPorn;
+/* No porn at testing period (seems Honeynet guys were truly committed to their work in setting up lab environment). Porn traffic appears only at "live" period and at PST daytime. Attendees bored of conference? Let's see the class A networks: */
+@AClassPornNetworks = @src
+| filter(sc_filter_category = 'Pornography')
+| select(c_ip & 0xFF000000l as network, requests:count(*))    //compute count by /8 network
+| group(@1)
+| sort(@2 desc)
+;
+//@AClassPornNetworks;
+/* Yeah, 99% are from conference (i.e of 45.0.0.0). (I wonder what the industry average is?). Still, we're only humans and this confirms
+   hypothesis of real live traffic. 
+   
+   Moving on, let's see the BlueCoat virus information: */
+@viruses = @src
+| select(x_virus_id, 
+		 testPeriodCnt:count(dateTime < T(2005,04,27)),
+		 livePeriodCnt:count(dateTime >= T(2005,04,27)))
+| group(@1).sort(@3 desc)
+;
+//@viruses;
+/* 25 different viruses identified. They make 0,002% of all requests, and half of them are not real virus infections but testing (EICAR test file). 
+   No real infections during test period. What sites distribute this stuff?*/
+@dropperSites = @src
+| filter(x_virus_id is not null AND x_virus_id != 'EICAR test file')
+| select(cs_host, count(*)).group(@1).sort(@2 desc)
+;
+//@dropperSites;
+/* 37 of sites. And techlabs.bluecoat.com among them. Really? Let's check it out: */
+@bluecoatTechlabs = @src
+| filter(x_virus_id is not null AND x_virus_id != 'EICAR test file')
+| filter(cs_host = 'techlabs.bluecoat.com')
+| select(dateTime, cs_method, sc_status, cs_uri_scheme, cs_uri_path, cs_uri_query, x_virus_id, x_virus_details)
+;
+//@bluecoatTechlabs;
+/* noisybear.cab - creation of Mark LaDue proof-of-concept malicious Java program (http://www.cigital.com/hostile-applets. Displays picture of a 
+   bear emitting annoying noise. Used for testing AV detection, similarly to eicar. We can safely exclude it from real dropper sites by
+   adding respective filter statement to @infectedClients query above 
+*/
+
+/*   How many clients infected? With which viruses? When? Following query produces list of client ip's with real infection
+attempts. In an enterprise environment setup this would serve a good starting point for CSIRT team mitigation actions.
+*/
+@infectedClients = @src
+| filter(x_virus_id is not null AND sc_status = 200)
+| filter(x_virus_id != 'EICAR test file')
+| filter(cs_host != 'techlabs.bluecoat.com')
+| select(
+   c_ip,
+   x_virus_id,
+   cs_username,
+   infectionTime:min(dateTime))	//get the earliest timestamp of infection
+| group(@1, @2, @3)
+;
+@infectedClients;
+/* CONCLUSION: 
+The logs provided us records of web traffic from April 4’th to May 7’th 2005. It includes three distinct periods, which we
+identified as
+
+    i) test period of initial setup (from 5’th to 14’th April),
+    ii) period of complete silence (from 13’th to 27’th April) and
+    iii) "live" period from April 27'th to May 7'th
+
+Testing period is characterized by relatively low number of requests (ten to few hundred per hour) to few selected sites,
+related to setting up BlueCoat and antivirus detection engine, updating operating system (Win XP SP1).
+
+The silence period could mean the lab folks spending their time on setting up surrounding environment for live period.
+
+Finally "live" period is characterized with rapidly increasing amount of traffic, peaking at 5'th May at 260 000 requests
+per hour and then gradually decreasing. The number of requests, originating clients and target hosts is high enough to make
+the artificial generation very complicated and unlikely. The distribution of originating clients and target hosts follows
+very closely the activity patterns of traffic.
+
+The activity patterns seem to match normal daily human activity: rapid increase from early morning hours, decreasing
+in the afternoon with distinct lower "saddle" indicating lunchbreak between them. The timezone matching this pattern will
+place the originating activity to US west coast (PST). Another aspect indicating human nature in origin of traffic is the
+presence of adult sites visits.
+
+Network analysis suggests strongly that the traffic is originating from participants of NetWorld(SM)+Interop(R) conference
+held May 1 - 6 at the Mandalay Bay Convention Center in Las Vegas.
+
+Observed virus infections were relatively low: only 0,002% of traffic relates to known viruses. Half of that relates to
+testing antivirus engines. From 3499 clients 49 were performing real virus downloads (i.e infection attempts).
+
+*/

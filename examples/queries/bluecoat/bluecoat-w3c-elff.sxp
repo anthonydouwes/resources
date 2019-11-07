@@ -1,0 +1,40 @@
+/*
+#Fields: date time time-taken c-ip sc-status s-action sc-bytes cs-bytes cs-method cs-uri-scheme cs-host cs-uri-path cs-uri-query cs-username s-hierarchy s-supplier-name rs(Content-Type) cs(User-Agent) sc-filter-result sc-filter-category x-virus-id s-ip s-sitename x-virus-details x-icap-error-code x-icap-error-details
+
+When using an ELFF or custom format, a blank field is represented by a dash character.
+*/
+$record = 
+TIMESTAMP('yyyy-MM-dd HH:mm:ss', tz='GMT'):dateTime ' '		//captures both date and time fields in TIMESTAMP type, followed by space. NB! as date nor time
+															//fields contain timezone info, we have to assign it ourselves. GMT is always a good candidate.
+LONG:time_taken ' '											//processing time could potentially be long. Let's use LONG type to capture it.
+IPV4:c_ip ' '												//it's 2005, so no IPV6 yet :-)
+INT:sc_status ' '											//http status code is INTEGER, we know that by heart
+('-' | [A-Z_]+:s_action) ' '								//s-action field seems to be uppercase letters and underscore (Appendix B, Table 7-3)
+LONG:sc_bytes ' '
+LONG:cs_bytes ' '
+LD:cs_method ' ' 
+LD:cs_uri_scheme ' '
+LD:cs_host ' '
+LD:cs_uri_path ' '
+('-' | LD{1,20000}:cs_uri_query) ' '
+('-' | LD:cs_username) ' '
+LD:s_hierarchy ' '
+LD:s_supplier_name ' '
+('-' | LD:rs_content_type) ' '
+('-' | DQS:cs_useragent) ' '
+UPPER:sc_filter_result ' '
+LD:sc_filter_category ' '
+('-' | DQS:x_virus_id) ' '
+IPV4:s_ip ' '
+LD:s_sitename
+(' ' DQS:x_virus_details)?
+(' ' LD:x_icap_error_code)?
+(' ' LD:x_icap_error_details)?
+[\n\r]+;
+
+$hdr = 
+'#' 		//header always begins with # symbol
+LD:hdrLine 	//capture rest of line with LD wildcard
+[\n\r]+;
+
+($hdr | $record)
