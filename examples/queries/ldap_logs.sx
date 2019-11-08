@@ -1,0 +1,18 @@
+@src = LIST(src:'s3s://sample-data/formats/log/ldap/$yyyy$-$MM$-$dd$_openldap.log')
+| PARSE(pattern:FETCH('https://raw.githubusercontent.com/spectx/resources/master/examples/patterns/ldap.sxp'));
+
+// create the stream with only connect records in it
+@conn = @src | filter(type = 'connect') | select(connId, c_sock);
+
+// normalize the op records by joining ip address from connect records:
+@src
+| filter(type = 'op')                        // we're only interested in operation records
+| join(@conn on left.connId = right.connId)  // join the connection records
+| select(timestamp,                          // select relevant fields
+         right.c_sock as c_sock,
+         connId,
+         opId,
+         op,
+         details
+);
+
