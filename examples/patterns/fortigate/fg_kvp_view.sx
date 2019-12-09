@@ -1,0 +1,11 @@
+LIST(src:'s3s://sample-data/formats/log/fortigate/FortiGate-6.2.0.traffic.log')
+| parse(pattern:FETCH('https://raw.githubusercontent.com/spectx/resources/master/examples/patterns/fortigate/fg_kvp.sxp'))
+| select(timestamp:	PARSE("TIMESTAMP(tz='UTC'):timestamp",attr[date] || ' ' || attr[time]),
+		 log_id:	STRING(attr[logid]),
+		 type:		STRING(attr[type]),
+		 sub_type:	STRING(attr[subtype]),
+		 level:		STRING(attr[level]),
+		 event_time:TIMESTAMP(INT(attr[eventtime])),
+		 vd:		STRING(attr[vd]),
+		 attr)
+;

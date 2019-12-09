@@ -1,0 +1,6 @@
+TIMESTAMP('yyyy-MM-dd HH:mm:ss.SSS Z', tz='GMT'):timestamp
+'\t' [A-Z ]+:level
+'\t' LD:thread
+'\t' LD:class
+'\t' DATA{1,50000}:message >>((EOL TIMESTAMP('yyyy-MM-dd HH:mm:ss.SSS Z')) | EOS) (EOL | EOS)
+

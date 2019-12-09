@@ -1,5 +1,5 @@
 /*
-	Pattern to parse FortiGate traffic log exported as text
+	Pattern to parse FortiGate traffic log downloaded as text
 */
 
 KVP{
