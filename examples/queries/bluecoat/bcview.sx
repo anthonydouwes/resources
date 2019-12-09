@@ -1,0 +1,32 @@
+/* Notes on usage:
+   1) The view depends on the pattern located at current directory ./bluecoat-w3c-elff.sxp. 
+      Adjust value of $pattern according to where you have saved it
+   2) The view reads files (Demo_log_001.log .. Demo_log_004.log) from 
+      http://log-sharing.dreamhosters.com/bluecoat_proxy_big.zip.
+   3) When executing the view it saves the result data to /shared/demo/bluecoat/bcdata.sxt.
+      If you prefer to query directly from the view then comment .save() statement below
+      and save the view script.
+      If you want to use different path/filename change the .save() path accordingly.
+*/
+$pattern = $[./bluecoat-w3c-elff.sxp];
+
+LIST('http://log-sharing.dreamhosters.com/bluecoat_proxy_big.zip')
+| PARSE(pattern:$pattern, archive_src:'Demo_log_*.log')
+| filter(hdrLine is null)
+| select(dateTime 
+		 ,c_ip                  //client ip addr
+		 ,sc_status             //Protocol status code from appliance to client
+		 ,cs_method             //Request method used from client to appliance
+		 ,cs_uri_scheme         //Scheme from the 'log' URL
+		 ,cs_host               //Hostname from the 'log' URL.
+		 ,cs_uri_path           //Path from the 'log' URL. Does not include query.
+		 ,cs_uri_query          //Query from the 'log' URL.
+		 ,cs_username           //Relative username of a client authenticated to the proxy (i.e. not fully distinguished)
+		 ,s_supplier_name       //Hostname of the upstream host (not available for a cache hit)
+		 ,rs_content_type       //Response header: Content-Type
+		 ,cs_useragent          //Request header: User-Agent
+		 ,sc_filter_result      //Content filtering result: Denied, Proxied or Observed
+		 ,sc_filter_category    //Content filtering category of the request URL
+		 ,x_virus_id            //Identifier of a virus if one was detected
+		 ,x_virus_details)      //Details of a virus if one was detected
+| save('/user/bcdata.sxt', true);
