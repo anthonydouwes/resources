@@ -1,0 +1,10 @@
+/*
+	Pattern to parse FortiGate traffic log exported as text
+*/
+
+KVP{
+ LD:key '='
+ (DQS:value_dqstr | IPADDR:value_ip | LONG:value_num | LD:value_str) (' '+ | >>EOL)
+}:attr
+EOL
+
