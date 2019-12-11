@@ -1,0 +1,18 @@
+Jul 17 16:53:53 server1 slapd[1010]: conn=7448 fd=43 connection from IP=192.168.4.36:40629 (IP=:: 389) accepted.
+Jul 17 16:53:53 server1 slapd[1010]: conn=7448 op=0 BIND dn="" method=128
+Jul 17 16:53:53 server1 slapd[1010]: conn=7448 op=0 RESULT tag=97 err=0 text=
+Jul 17 16:53:53 server1 slapd[1010]: conn=7448 op=1 SRCH base="ou=people,dc=example,dc=com" scope=2 filter="(objectClass=*)"
+Jul 17 16:53:53 server1 slapd[1010]: conn=7448 op=1 SEARCH RESULT tag=101 err=0 text=
+Jul 17 16:53:54 server1 slapd[1010]: conn=7448 op=2 UNBIND
+Jul 17 16:53:54 server1 slapd[1010]: conn=-1 fd=43 closed
+Jul 17 17:00:14 server1 slapd[1010]: daemon: conn=7453 fd=48 connection from IP=192.168.2.104:40648 (IP=:: 278) accepted.
+Jul 17 17:00:14 server1 slapd[1010]: conn=7453 op=0 BIND dn="CN=MANAGER,DC=EXAMPLE,DC=COM" method=128
+Jul 17 17:00:14 server1 slapd[1010]: conn=7453 op=0 RESULT tag=97 err=0 text=
+Jul 17 17:00:14 server1 slapd[1010]: conn=7453 op=1 SRCH base="dc=example,dc=com" scope=2 filter="(uid=user1)"
+Jul 17 17:00:14 server1 slapd[1010]: conn=7453 op=1 SEARCH RESULT tag=101 err=0 text=
+Jul 17 17:00:14 server1 slapd[1010]: conn=7453 op=2 SRCH base="ou=Group,dc=example,dc=com" scope=1 filter="(&(objectClass=posixGroup)(|(memberUid=user1)(uniqueMember=uid=user1,ou=People,dc=example,dc=com)))"
+Jul 17 17:00:14 server1 slapd[1010]: conn=7453 op=2 SEARCH RESULT tag=101 err=0 text=
+Jul 17 17:00:14 server1 slapd[1010]: conn=7453 op=3 SRCH base="ou=People,dc=example,dc=com" scope=1 filter="(&(objectClass=shadowAccount)(uid=user1))"
+Jul 17 17:00:14 server1 slapd[1010]: conn=7453 op=3 SEARCH RESULT tag=101 err=0 text=
+Jul 17 17:00:15 server1 slapd[1010]: conn=7453 op=4 UNBIND
+Jul 17 17:00:15 server1 slapd[1010]: conn=-1 fd=48 closed

@@ -1,0 +1,44 @@
+/* 
+	OpenLDAP access log at default log level (256 = Logging for access to an entry) with default syslog config.
+*/
+
+// every request always begins with timestamp, server and process info, let's capture it as header:
+$hdr =
+  TIMESTAMP('MMM d HH:mm:ss'):timestamp ' ' LD:host ' ' LD:process '[' INT:pid ']:'
+  LD                    //skip spaces between pid and conn
+  'conn=' INT:connId;   // connection id will be our session identifier
+
+// connect record:
+$connRec =
+ <'connect'>:type           //metafield (added after parsing) recType contains record type: 'connect'
+ $hdr                       //record begins with header
+ ' fd=' INT:fd              //followed by 'fd=' key value pair
+ LD* ' connection from IP=' //skip everything until string const (note modifier * allows to skip 0 bytes too)
+ IPV4SOCKET:c_sock          //client socket exported as 'c_sock'
+ LD                         //skip until
+ EOL                        //the end of line
+;
+
+// operation record:
+$opRec =
+ <'op'>:type                //metafield (added after parsing) recType contains record type: 'op'
+ $hdr                       //record begins with header
+ ' op=' INT:opId            //followed by 'op=' key value pair
+ ' ' [A-Z ]+:op             //followed by single space and uppercase keyword describing operation
+ LD*:details                //capture details as string
+ EOL                        //until the end of line
+ ;
+
+// connection close record:
+$closeRec =
+ <'close'>:type             //metafield (added after parsing) recType contains record type: 'close'
+ $hdr                       //record begins with header
+ ' fd=' INT:fd              //string 'fd=' key value pair
+ ' closed'                  //followed by string constant
+ EOL                        //until the end of line
+ ;
+
+// this is our main pattern expression
+// inside the alternatives group we match records declared above: connection or operation or close.
+( $connRec | $opRec | $closeRec );
+
