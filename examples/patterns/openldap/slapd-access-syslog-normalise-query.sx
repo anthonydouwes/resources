@@ -1,0 +1,22 @@
+// Note that since we're using time patterns in uri to select the source data
+// the evaluated path_time will be used to automatically adjust the record timestamps.
+@src = PARSE(pattern:FETCH('https://raw.githubusercontent.com/spectx/resources/master/examples/patterns/openldap/slapd-access-syslog.sxp'), 
+			 src:'s3s://spectx-docs/formats/log/ldap/$yyyy$-$MM$-$dd$_slapd_access-syslog.log');
+
+// create a stream with only connect records
+@conn = @src
+| filter(type = 'connect')
+| select(connId, c_sock);
+
+// normalized view of ldap op records:
+@src
+| filter(type = 'op')                        //include only operation records
+| join(@conn on left.connId = right.connId)  //join the connection records (to include remote ip-addr)
+| select(timestamp,                          //select fields for normalised view: 
+         c_socket:right.c_sock,
+         connId,
+         opId,
+         op:TRIM(op),
+         details
+);
+
