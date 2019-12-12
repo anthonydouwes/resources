@@ -1,4 +1,4 @@
-LIST(src:'s3s://sample-data/formats/log/apache/apache_access.log.sx.gz')
+LIST(src:'s3s://spectx-docs/formats/log/apache/apache_access.log.sx.gz')
 | parse(pattern:FETCH('https://raw.githubusercontent.com/spectx/resources/master/examples/patterns/apache/apache.sxp'))
 | select(CC(clientIp), cnt:count(*))
 | group(@1)
