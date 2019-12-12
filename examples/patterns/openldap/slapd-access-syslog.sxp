@@ -41,3 +41,4 @@ $closeRec =
 // this is our main pattern expression
 // inside the alternatives group we match records declared above: connection or operation or close.
 ( $connRec | $opRec | $closeRec );
+
