@@ -1,0 +1,23 @@
+@src = PARSE(pattern:FETCH('https://raw.githubusercontent.com/spectx/resources/master/examples/patterns/openldap/slapd-access-custom.sxp'),
+						   src:'s3s://spectx-docs/formats/log/ldap/slapd_access-custom.log');
+				  
+@conn_ips = @src | filter(type = 'connect') | select(conn_id, c_ip);
+
+@result_records = @src | filter(type = 'op' AND op contains 'RESULT') | select(conn_id, op_id, result:details) ;
+
+@op_with_result = @src
+| filter(type = 'op' AND op NOT IN('UNBIND', 'ABANDON', 'RESULT'))
+| join(@conn_ips as conn on left.conn_id = conn.conn_id) 
+| join(@result_records as result_rec on left.conn_id = result_rec.conn_id and left.op_id = result_rec_op_id)
+| select(timestamp, c_ip, conn_id, op_id, op, result, details)
+;
+
+@op_without_result = @src
+| filter(type = 'op' and op in ('UNBIND', 'ABANDON'))
+| join(@conn_ips as conn on left.conn_id = conn.conn_id)
+| select(timestamp, c_ip, conn_id, op_id, op)
+;
+
+// normalised resultset:
+@op_with_result | union(@op_without_result) | sort(timestamp)
+;
