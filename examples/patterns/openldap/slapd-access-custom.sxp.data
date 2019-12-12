@@ -1,0 +1,33 @@
+[21/Apr/2009:11:39:51 -0700] conn=11 fd=608 slot=608 connection from 207.1.153.51 to 192.18.122.139
+[21/Apr/2009:11:39:51 -0700] conn=11 op=0 BIND dn="cn=Directory Manager" method=128 version=3
+[21/Apr/2009:11:39:51 -0700] conn=11 op=0 RESULT err=0 tag=97 nentries=0 etime=0
+[21/Apr/2009:11:39:51 -0700] conn=11 op=1 SRCH base="dc=example,dc=com" scope=2 filter="(mobile=+1 123 456-7890)"
+[21/Apr/2009:11:39:51 -0700] conn=11 op=1 RESULT err=0 tag=101 nentries=1 etime=3 notes=U
+[21/Apr/2009:11:39:51 -0700] conn=11 op=2 UNBIND
+[21/Apr/2009:11:39:51 -0700] conn=11 op=2 fd=608 closed - U1
+[21/Apr/2009:11:39:52 -0700] conn=12 fd=634 slot=634 connection from 207.1.153.51 to 192.18.122.139
+[21/Apr/2009:11:39:52 -0700] conn=12 op=0 BIND dn="cn=Directory Manager" method=128 version=3
+[21/Apr/2009:11:39:52 -0700] conn=12 op=0 RESULT err=0 tag=97 nentries=0 etime=0
+[21/Apr/2009:11:39:52 -0700] conn=12 op=1 SRCH base="dc=example,dc=com" scope=2 filter="(uid=bjensen)"
+[21/Apr/2009:11:39:52 -0700] conn=12 op=2 ABANDON targetop=1 msgid=2 nentries=0 etime=0
+[21/Apr/2009:11:39:52 -0700] conn=12 op=3 UNBIND
+[21/Apr/2009:11:39:52 -0700] conn=12 op=3 fd=634 closed - U1
+[21/Apr/2009:11:39:53 -0700] conn=13 fd=659 slot=659 connection from 207.1.153.51 to 192.18.122.139
+[21/Apr/2009:11:39:53 -0700] conn=13 op=0 BIND dn="cn=Directory Manager" method=128 version=3
+[21/Apr/2009:11:39:53 -0700] conn=13 op=0 RESULT err=0 tag=97 nentries=0 etime=0
+[21/Apr/2009:11:39:53 -0700] conn=13 op=1 EXT oid="2.16.840.1.113730.3.5.3"
+[21/Apr/2009:11:39:53 -0700] conn=13 op=1 RESULT err=0 tag=120 nentries=0 etime=0
+[21/Apr/2009:11:39:53 -0700] conn=13 op=2 ADD dn="cn=Sat Apr 21 11:39:51 MET DST 2009, dc=example,dc=com"
+[21/Apr/2009:11:39:53 -0700] conn=13 op=2 RESULT err=0 tag=105 nentries=0 etime=0 csn=3b4c8cfb000000030000
+[21/Apr/2009:11:39:53 -0700] conn=13 op=3 EXT oid="2.16.840.1.113730.3.5.5"
+[21/Apr/2009:11:39:53 -0700] conn=13 op=3 RESULT err=0 tag=120 nentries=0 etime=0
+[21/Apr/2009:11:39:53 -0700] conn=13 op=4 UNBIND
+[21/Apr/2009:11:39:53 -0700] conn=13 op=4 fd=659 closed - U1
+[21/Apr/2009:11:39:55 -0700] conn=14 fd=700 slot=700 connection from 207.1.153.51 to 192.18.122.139
+[21/Apr/2009:11:39:55 -0700] conn=14 op=0 BIND dn="" method=sasl version=3 mech=DIGEST-MD5
+[21/Apr/2009:11:39:55 -0700] conn=14 op=0 RESULT err=14 tag=97 nentries=0 etime=0, SASL bind in progress
+[21/Apr/2009:11:39:55 -0700] conn=14 op=1 BIND dn="uid=jdoe,dc=example,dc=com" method=sasl version=3 mech=DIGEST-MD5
+[21/Apr/2009:11:39:55 -0700] conn=14 op=1 RESULT err=0 tag=97 nentries=0 etime=0 dn="uid=jdoe,dc=example,dc=com"
+[21/Apr/2009:11:39:55 -0700] conn=14 op=2 UNBIND
+[21/Apr/2009:11:39:53 -0700] conn=14 op=2 fd=700 closed - U1
+[21/Apr/2009:11:39:55 -0700] conn=14 op=3 UNBIND comment

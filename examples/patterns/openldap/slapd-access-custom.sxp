@@ -1,0 +1,57 @@
+/*
+	OpenLDAP access log at default log level (256 = Logging for access to an entry.)
+	sample data: s3s://spectx-docs/formats/log/ldap/slapd_access-custom.log
+*/
+
+// every request always begins with timestamp, server and process info, let's capture it as header:
+$hdr =
+  '[' TIMESTAMP('dd/MMM/yyyy:HH:mm:ss Z'):timestamp '] ' 
+  'conn=' INT:conn_id;   // connection id will be our session identifier
+
+// connect record:
+$connRec =
+ <'connect'>:type           //metafield (added after parsing) recType contains record type: 'connect'
+ $hdr                       //record begins with header
+ ' fd=' INT:fd              //followed by 'fd=' key value pair
+ LD* ' connection from '    //skip everything until string const (note modifier * allows to skip 0 bytes too)
+ IPADDR:c_ip              //client ip-address exported as 'c_ip'
+ LD                         //skip until
+ EOL                        //the end of line
+;
+
+$details_kvp = 			//sub-pattern for parsing event data key-value pairs
+KVP{
+	LOWER:key '='
+	(DQS:value_dqstr | INT:value_int | ([a-zA-Z0-9_-]*:value_str)) ((' ' >>(LOWER '=')) | >>', ' | >>EOL) 
+}*:details
+', '? LD?:message
+;
+
+// operation record:
+$opRec =
+ <'op'>:type                //metafield (added after parsing) recType contains record type: 'op'
+ $hdr                       //record begins with header
+ ' op=' INT:op_id           //followed by 'op=' key value pair
+ ' ' UPPER:op ' '?           //followed by single space and uppercase keyword describing operation
+ $details_kvp				//capture event data as key-value pairs
+ EOL                        //until the end of line
+ ;
+
+// connection close record:
+$closeRec =
+ <'close'>:type             //metafield (added after parsing) recType contains record type: 'close'
+ $hdr                       //record begins with header
+ ' op=' INT:op_id           //followed by 'op=' key value pair 
+ ' fd=' INT:fd              //string 'fd=' key value pair
+ ' closed'                  //followed by string constant
+ LD*
+ EOL                        //until the end of line
+ ;
+
+/* root pattern expression:
+   uses alternative group, i.e we may have either connection or operation or close records.
+   Everything else is unmatched
+*/
+( $connRec | $opRec | $closeRec );
+
+
