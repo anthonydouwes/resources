@@ -6,7 +6,7 @@
 $hdr =
   TIMESTAMP('MMM d HH:mm:ss'):timestamp ' ' LD:host ' ' LD:process '[' INT:pid ']:'
   LD                    //skip spaces between pid and conn
-  'conn=' INT:connId;   // connection id will be our session identifier
+  'conn=' INT:conn_id;   // connection id will be our session identifier
 
 // connect record:
 $connRec =
@@ -23,7 +23,7 @@ $connRec =
 $opRec =
  <'op'>:type                //metafield (added after parsing) recType contains record type: 'op'
  $hdr                       //record begins with header
- ' op=' INT:opId            //followed by 'op=' key value pair
+ ' op=' INT:op_id            //followed by 'op=' key value pair
  ' ' [A-Z ]+:op             //followed by single space and uppercase keyword describing operation
  LD*:details                //capture details as string
  EOL                        //until the end of line
@@ -41,4 +41,3 @@ $closeRec =
 // this is our main pattern expression
 // inside the alternatives group we match records declared above: connection or operation or close.
 ( $connRec | $opRec | $closeRec );
-
