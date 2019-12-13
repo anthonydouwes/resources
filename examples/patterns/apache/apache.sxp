@@ -1,6 +1,6 @@
 (IPADDR:clientIp | [! \n]+):host
-' ' ('-' | NSPACE:ident)
-' ' ('-' | (DATA{1,8096}:auth >>(' [' HTTPDATE)))
+' ' ('-' | NSPACE:ident)                          // Apache auth is vulnerable to the
+' ' ('-' | (DATA{1,8096}:auth >>(' [' HTTPDATE))) // log poisoning attach via auth field
 ' ' '[' HTTPDATE:timestamp ']'
 ' ' (('\"' [A-Z-_]+:verb ' ' LD{0,8096}:uri ' HTTP/' FLOAT:httpversion '\"') | DQS:invalidRequest)
 ' ' INTEGER:response
