@@ -1,0 +1,4 @@
+LIST(src:'s3s://spectx-docs/formats/log/winevt-json/2019-01-29.DESKTOP-VHONLD1.winevt.log.sx.gz')
+| PARSE(pattern:FETCH('https://raw.githubusercontent.com/spectx/resources/master/examples/patterns/winevt-json/winevt-json.sxp'))
+| filter (event_id = 1 AND event_category = 5)
+;

@@ -1,0 +1,21 @@
+/*
+	Windows event log exported by Fluentd windows_eventlog plugin. 
+	Fields: collected_time (timestamp), collected_host (string), event_data (json object).
+*/
+
+TIMESTAMP('yyyy-MM-ddTHH:mm:ssZ'):time_collected '\t'
+LD:host '\t'
+JSON{
+ STRING:channel,
+ INT:record_number,
+ TIMESTAMP:time_generated,
+ TIMESTAMP:time_written,
+ INT:event_id,
+ INT:event_category,
+ STRING:source_name,
+ STRING:computer_name,
+ STRING:user,
+ STRING:description,
+ JSON_ARRAY{}(typed=true):string_inserts
+}(flat=true)
+EOL
