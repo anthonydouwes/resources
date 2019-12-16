@@ -1,0 +1,18 @@
+/*
+	Pattern for parsing Nginx access log written via syslog and customised by x-forwarded-for header values appended to the default fields.
+	sample data: s3s://spectx-docs/formats/log/nginx/nginx-access-xff-syslog.log
+*/
+$syslogHdr = TIMESTAMP('MMM d HH:mm:ss', tz='UTC'):syslog_time ' ' LD:server ' ' LD:proc ('[' INT:pid ']')? ':' ' ';
+
+$apache_combined = (IPADDR:client_ip | [! \n]+):host
+' ' ('-' | NSPACE:ident)                          // Apache auth is vulnerable to the 
+' ' ('-' | (DATA{1,8096}:auth >>(' [' HTTPDATE))) // log poisoning attach via auth field
+' ' '[' HTTPDATE:timestamp ']'
+' ' (('\"' [A-Z-_]+:verb ' ' LD{0,8096}:uri ' HTTP/' FLOAT:httpversion '\"') | DQS:invalid_request)
+' ' INTEGER:response
+' ' (LONG:bytes | '-')
+(' ' DQS:referrer (' ' DQS:agent)?)?;
+
+$x_forwarded_for = ' ' ARRAY{IPADDR:ip ','? ' '?}*:xff;
+
+$syslogHdr $apache_combined $x_forwarded_for EOL;

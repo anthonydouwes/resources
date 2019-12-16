@@ -1,0 +1,8 @@
+LIST(src:'s3s://spectx-docs/formats/log/nginx/nginx-access-xff-syslog.log')
+| parse(pattern:FETCH('https://raw.githubusercontent.com/spectx/resources/master/examples/patterns/nginx/nginx-access-xff-syslog.sxp'))
+| select(c_country:CC(xff[0]), cnt:count(*))
+| group(@1)
+| sort(cnt DESC)
+| limit(5)
+;
+
