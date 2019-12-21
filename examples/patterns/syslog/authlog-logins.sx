@@ -1,0 +1,15 @@
+@[/user/syslog.sx]
+| filter (process = 'sshd')
+| select(det:PARSE(FETCH('https://raw.githubusercontent.com/spectx/resources/master/examples/patterns/syslog/authlog-login-msg.sxp'),
+                   message),*)
+| filter(det is not null)
+| select(syslog_time, 
+		 host,  
+		 det[method], 
+		 det[result], 
+		 det[username], 
+		 invalid_user:IF(det[invalid_user] is not null, true, false),
+		 det[ip], 
+		 det[port], 
+		 count)
+;

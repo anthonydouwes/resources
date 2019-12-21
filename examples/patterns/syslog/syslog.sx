@@ -1,0 +1,24 @@
+LIST(src:'s3s://spectx-docs/formats/log/syslog/auth.log.gz')
+| parse(pattern:FETCH('https://raw.githubusercontent.com/spectx/resources/master/examples/patterns/syslog/syslog.sxp'))
+| select(syslog_time, 
+		 host, 
+		 process, 
+		 pid, 
+		 message, 
+		 count:1 + $get_repeated_count(syslog_time, host, process, pid, 
+						 repeated[rep_time], repeated[rep_host], repeated[rep_process], repeated[rep_pid],
+						 repeated[count])
+		)
+;
+
+$get_repeated_count(time,   host,   process,   pid,
+				    r_time, r_host, r_process, r_pid,
+				    rep_count) =
+  IF(	$r_time IS NOT NULL AND         //if no repeated info then return 0
+	  $time[2 min] = $r_time[2 min] AND //make sure repeated time is in allowed timeframe
+	  $host = $r_host AND               //make sure repeated host is the same as original 
+	  $process = $r_process AND         //make sure repeated process is the same as original			
+	  $pid = $r_pid                     //make sure pid is the same as original 
+	  ,$rep_count  //if all conditions above evaluate to true only then return repeated count
+	  ,0)          //else return 0
+;

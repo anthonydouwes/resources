@@ -1,0 +1,145 @@
+Oct 14 06:25:18 dns syslogd 1.4.1#18: restart.
+Oct 14 06:26:50 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 06:31:28 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 06:31:35 dns last message repeated 3 times
+Oct 14 06:34:59 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 06:36:47 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 06:40:13 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Dec 15 06:25:04 dns named[2424]: message repeated 2 times: [ unable to rename log file '/var/log/bind.log' to '/var/log/b]
+Oct 14 06:43:41 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 06:44:49 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 06:48:04 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 06:50:01 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 06:50:55 dns last message repeated 6 times
+Oct 14 06:52:39 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 06:54:19 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 06:55:04 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 06:55:55 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:01:25 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:01:37 dns last message repeated 2 times
+Oct 14 07:08:08 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:10:37 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:11:02 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:14:43 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:14:54 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:17:01 dns /USR/SBIN/CRON[20028]: (root) CMD (   cd / && run-parts --report /etc/cron.hourly)
+Oct 14 07:20:01 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:20:22 dns last message repeated 2 times
+Oct 14 07:23:10 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:24:19 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:28:06 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:32:36 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:33:35 dns last message repeated 2 times
+Oct 14 07:34:59 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:36:08 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:40:13 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:41:35 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:42:21 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:44:43 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:44:49 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:48:54 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:50:01 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:50:55 dns last message repeated 3 times
+Oct 14 07:54:19 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:55:03 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:57:03 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 07:57:12 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:01:39 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:02:02 dns last message repeated 2 times
+Oct 14 08:04:52 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:05:10 dns last message repeated 2 times
+Oct 14 08:07:18 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:09:17 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:12:14 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:15:07 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:17:01 dns /USR/SBIN/CRON[22311]: (root) CMD (   cd / && run-parts --report /etc/cron.hourly)
+Oct 14 08:20:01 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:20:01 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:21:30 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:24:19 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:25:59 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:30:46 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:33:44 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:35:11 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:40:13 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:41:35 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:42:25 dns last message repeated 2 times
+Oct 14 08:44:17 dns last message repeated 3 times
+Oct 14 08:44:56 dns last message repeated 3 times
+Oct 14 08:45:57 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:47:17 dns last message repeated 2 times
+Oct 14 08:48:18 dns last message repeated 2 times
+Oct 14 08:49:39 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:50:13 dns last message repeated 4 times
+Oct 14 08:51:37 dns last message repeated 7 times
+Oct 14 08:52:33 dns last message repeated 2 times
+Oct 14 08:53:43 dns last message repeated 2 times
+Oct 14 08:54:42 dns last message repeated 3 times
+Oct 14 08:55:30 dns last message repeated 2 times
+Oct 14 08:57:28 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 08:58:39 dns last message repeated 7 times
+Oct 14 08:59:30 dns last message repeated 4 times
+Oct 14 09:00:40 dns last message repeated 4 times
+Oct 14 09:01:43 dns last message repeated 2 times
+Oct 14 09:02:22 dns last message repeated 4 times
+Oct 14 09:03:26 dns last message repeated 4 times
+Oct 14 09:04:13 dns last message repeated 4 times
+Oct 14 09:05:20 dns last message repeated 8 times
+Oct 14 09:06:37 dns last message repeated 4 times
+Oct 14 09:08:52 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:09:20 dns last message repeated 10 times
+Oct 14 09:10:25 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:14:54 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:15:05 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:17:01 dns /USR/SBIN/CRON[22899]: (root) CMD (   cd / && run-parts --report /etc/cron.hourly)
+Oct 14 09:19:14 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:20:01 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:20:01 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:22:38 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:23:45 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:24:19 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:27:16 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:31:36 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:32:33 dns last message repeated 3 times
+Oct 14 09:34:52 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:35:10 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:39:43 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:40:13 dns last message repeated 4 times
+Oct 14 09:41:36 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:42:30 dns last message repeated 4 times
+Oct 14 09:47:06 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:47:19 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:50:01 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:50:55 dns last message repeated 8 times
+Oct 14 09:51:51 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:54:19 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:55:15 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 09:59:19 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:01:45 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:01:46 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:10:08 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:11:22 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:11:33 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:15:41 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:17:01 dns /USR/SBIN/CRON[23310]: (root) CMD (   cd / && run-parts --report /etc/cron.hourly)
+Oct 14 10:20:01 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:20:01 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:23:47 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:24:19 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:25:16 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:28:26 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:35:45 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:36:00 dns last message repeated 2 times
+Oct 14 10:40:13 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:41:36 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:42:34 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:45:39 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:48:14 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:50:01 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:50:55 dns last message repeated 3 times
+Oct 14 10:54:19 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:55:31 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 10:55:52 dns last message repeated 2 times
+Oct 14 10:59:51 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 11:00:28 dns named[2424]: unable to rename log file '/var/log/bind.log' to '/var/log/bind.log.0': permission denied
+Oct 14 11:01:50 dns last message repeated 2 times

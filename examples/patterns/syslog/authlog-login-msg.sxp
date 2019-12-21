@@ -1,0 +1,6 @@
+' '? WORD:result ' ' WORD:method ' for '? 
+'invalid user '?:invalid_user WORD:username 
+' from ' IPADDR:ip 
+' port ' INT:port 
+' ssh2' LD*:signature 
+(EOS | EOL) ;

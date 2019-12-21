@@ -1,0 +1,32 @@
+/*
+	Pattern for parsing BSD syslog format https://tools.ietf.org/html/rfc3164
+*/
+/* declare the header fields:		*/
+$hdr = 
+TIMESTAMP('MMM d HH:mm:ss', tz='UTC'):syslog_time ' ' // timestamp, followed by a space
+LD:host ' ' 										  // host/ip-addr, followed by a space
+[!:\[ ]+:process 									  // process name
+('[' INT:pid ']')?                                    // optional pid, enclosed in square brackets
+':'? ' '?											  // followed by optional colon and space
+;
+
+/* declare the message field: */
+$msg = 
+DATA{0,250000}:message 								// capture message of 0 to 250kB long until
+(EOF | (EOL >> TIMESTAMP('MMM d HH:mm:ss')));       // the end of file/stream or next line beginning with a timestamp
+
+/*declare the repeated message fields: */
+$repeated = 										// export repeated message header fields separately
+TIMESTAMP('MMM d HH:mm:ss', tz='UTC'):rep_time ' '  // repeated msg timestamp
+LD:rep_host ' ' 									// repeated msg host/ip-addr
+[!:\[ ]+:rep_process 								// repeated msg process name
+('[' INT:rep_pid ']')? 								// repeated msg pid
+':'? ' '?
+LD* 												// skip various prefixed phrases of different syslog implementations
+' message repeated ' INT:count ' times' 			// extract repeated count
+ LD*:rep_message EOL								// extract original message (if any)
+;
+
+// the main pattern consists of:
+// header followed by message followed optionally by repeated message (exported as tuple field named 'repeated')
+$hdr $msg $repeated?:repeated
