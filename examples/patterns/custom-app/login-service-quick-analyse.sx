@@ -1,0 +1,18 @@
+init(
+'_query.now':T('2020-01-02 21:00:00.000 +0000')
+);
+
+
+$pattern = <<<PATTERN
+   TIMESTAMP:time
+   '\t' IPADDR:ip
+   '\t' LD				//ignore third field
+   '\t' INT:response
+   LD EOL				//ignore everything until the end of line
+PATTERN;
+
+LIST('s3s://spectx-docs/formats/log/custom-app/login-service.log.sx.gz')
+| parse(pattern:$pattern)
+| filter(time > NOW()[-3 day])
+| select(time[1 h], ok:count(response=200), rejected:count(response!=200)) | group(@1)
+;

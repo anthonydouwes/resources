@@ -1,0 +1,9 @@
+TIMESTAMP:time
+'\t' IPADDR:ip
+'\t' LD:req_id
+'\t' INT:response
+'\t' FLOAT:duration
+'\t' LD:http_method
+'\t' LD:uri
+'\t' 'payload:' JSON:payload
+EOL
