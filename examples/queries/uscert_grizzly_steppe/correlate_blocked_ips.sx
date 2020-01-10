@@ -1,0 +1,21 @@
+$srcp = <<<PATTERN_END
+(
+  TIMESTAMP('yyyy-MM-dd HH:mm:ss.SSS Z'):dateTime
+  LD:userName
+  IPV4:ipAddr
+  DQS:userAgent
+  UPPER:result
+)(fs='\t')
+EOL
+PATTERN_END;
+
+@logins = PARSE(pattern:$srcp, src:'https://logsamples.spectx.com/custom/psw_scan.log.sx.gz');
+
+/* get suspect ips from web access log */
+@suspectIps = @[./grizzly_in_web_access.sx] // web access log records with suspected ip-addresses
+ | select(clientIp, count(*)).group(@1)     // aggregation gives us unique ip-addresses
+ | select(clientIp);
+
+@logins
+| filter(ipAddr in (@suspectIps))
+| select(dateTime, userName, cc(ipAddr), result, userAgent);

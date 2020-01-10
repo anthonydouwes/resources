@@ -1,0 +1,47 @@
+    // a CSV format is pretty straightforward to parse:
+    $srcp = <<<PATTERN_END
+      LD*:indicatorValue    //parse as string because of weird formatting, see Note1 below
+      ',' LD*:type
+      ',' LD*:comment
+      ',' LD*:role
+      ',' LD*:attackPhase
+      ',' LD*:observedDate
+      ',' LD*:handling
+      ',' LD*:description
+      EOL
+    PATTERN_END;
+
+    /* Note1: for some reason US-CERT guys have made decision to populate ip-addresses and domain
+       names in a somewhat nontraditional form like: 192[.]168[.]0[.]1
+       We need to replace the [.] with dots before translating them into respective types of IPV4,
+       IPV6 or STRING. This is what our user defined function $getHost(iVal) does:
+    */
+
+    $hostPattern = <<<PATTERN_END
+        (                      // use alternative group to choose between types:
+          IPV4:clientIpv4 |    // note that each of these alternatives will be
+          IPV6:clientIpv6 |    // outputted as tuple structure
+          [! \n]+:host
+        )
+        EOS
+    PATTERN_END;
+
+    // function to handle funny formatted ip-addresses, uses $hostPattern above
+    $getHost(iVal) = PARSE($hostPattern, REPLACE($iVal, '[.]', '.') );
+
+    // execute main query:
+    PARSE(pattern:$srcp, src:'https://www.us-cert.gov/sites/default/files/publications/JAR-16-20296A.csv')
+    | select($getHost(indicatorValue) as hostVal, *) //use $getHost function to parse ip-addresses
+                                                     //from indicatorValue field as tuple structure
+    | filter(indicatorValue != 'INDICATOR_VALUE')    //get rid of header row
+    | select(hostVal[clientIpv4] as ipv4,            //populate ipv4, ipv6 and domain names to different
+        hostVal[clientIpv6] as ipv6,                 //resultset columns
+        hostVal[host] as host,
+        type,
+        comment,
+        role,
+        attackPhase,
+        observedDate,
+        handling,
+        description)
+    ;
