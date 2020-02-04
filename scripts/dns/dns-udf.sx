@@ -1,7 +1,7 @@
-$parseDnsMessage(bytes) = CREATE FUNCTION(
-  language:'javascript', 
-  library:['./pcap-dns.js', './pcap-utils.js'],
-  returns:{txId:0, 
+$parseDnsMessage(bytes, captureLen, networkType, transportType, srcPort, dstPort) = CREATE FUNCTION(
+  language:'javascript',
+  library:['pcap-dns.js', 'pcap-utils.js'],
+  returns:{txId:0,
 		  flags:0,
   		  opCode:0,
 		  isQuery:false,
@@ -10,17 +10,19 @@ $parseDnsMessage(bytes) = CREATE FUNCTION(
 		  recursionDesired:false,
 		  recursionAvailable:false,
 		  rCode:0,
-		  questionCnt:0, 
-		  answerCnt:0, 
-		  authorityCnt:0, 
+		  questionCnt:0,
+		  answerCnt:0,
+		  authorityCnt:0,
 		  additionalCnt:0,
 		  queries:[{qType:0,qClass:0,qName:""}],
 		  answers:[{name:"", type:-1, class:-1, ttl:-1, rdata:""}]
 		 },
-  code: "return parseDnsMessage(bytes);"
+  code: "return parseDnsMessage(bytes,captureLen, networkType, transportType, srcPort, dstPort);"
 );
 
-$getRRType(typeId) = 
+
+
+$getRRType(typeId) =
  CASE
   WHEN $typeId = 1 THEN "A"
   WHEN $typeId = 5 THEN "CNAME"
@@ -37,7 +39,7 @@ $getRRType(typeId) =
  END
 ;
 
-$getClassType(typeId) = 
+$getClassType(typeId) =
  CASE
   WHEN $typeId = 1 THEN "IN"
   WHEN $typeId = 3 THEN "CH"
@@ -48,7 +50,7 @@ $getClassType(typeId) =
  END
 ;
 
-$getResponse(code) = 
+$getResponse(code) =
  CASE
   WHEN $code = 0 THEN "NoError"
   WHEN $code = 1 THEN "FormErr"
@@ -74,11 +76,11 @@ $getResponse(code) =
  END
 ;
 
-$getRdata(str) = 
+$getRdata(str) =
   PARSE("( (DATA* IPADDR:address DATA* EOS) | (DATA:data EOS))", $str)
 ;
 
-$getOpCode(code) = 
+$getOpCode(code) =
  CASE
   WHEN $code = 0 THEN "Query"
   WHEN $code = 1 THEN "IQuery"
