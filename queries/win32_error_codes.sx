@@ -1,0 +1,3 @@
+LIST('s3s://spectx-docs/formats/custom/win32_error_codes-180912.txt')
+| parse(pattern:"SPACE{0,10} HEXLONG:errcode EOL LD:label '\t' LD:desc EOL")
+;
