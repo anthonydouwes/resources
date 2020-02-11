@@ -1,0 +1,7 @@
+TIMESTAMP:timestamp '\t'    // the first field is a time, followed by TAB
+IPADDR:c_ip         '\t'    // second is an ip-address, followed by TAB
+LD{0,20000}:uri     '\t'    // third field is URI, up until a TAB character
+INT:response        '\t'    // fourth field is HTTP response code
+LONG:bytes          '\t'    // fifth field is the number of bytes returned
+JSON:headers        EOL     // sixth field is a JSON containing all request headers, followed by end-of-line (LF)
+;
