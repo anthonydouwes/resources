@@ -1,7 +1,7 @@
 $pattern = "TIMESTAMP:timestamp '\t' IPADDR:c_ip '\t' LD{0,20000}:uri '\t' INT:response '\t' LONG:bytes '\t' JSON:headers EOL";
 
 LIST('s3s://spectx-docs/logs/disobey-2020/tracking_access-2019.log.pi.gz')
-| parse(pattern:$pattern);
+| parse(pattern:$pattern)
                                                 // Use aggregated count to see header occurrence:
 | select(hdrs:UNNEST(headers))                  // UNNEST expands the headers into separate rows
                                                 // (uncomment commands in next lines to see its output)
