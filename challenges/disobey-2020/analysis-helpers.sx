@@ -1,0 +1,41 @@
+$pattern = "TIMESTAMP:timestamp '\t' IPADDR:c_ip '\t' LD{0,20000}:uri '\t' INT:response '\t' LONG:bytes '\t' JSON:headers EOL";
+
+LIST('s3s://spectx-docs/logs/disobey-2020/tracking_access-2019.log.pi.gz')
+| parse(pattern:$pattern);
+                                                // Use aggregated count to see header occurrence:
+| select(hdrs:UNNEST(headers))                  // UNNEST expands the headers into separate rows
+                                                // (uncomment commands in next lines to see its output)
+| select(hdrs[key] as hdr_name, cnt:count(*))   // we count all header names
+| group(hdr_name)                               // grouping by field 'hdr_name'
+| sort(cnt DESC)                                // sort result by cnt in descending order
+;
+
+/*
+	Below are helper functions to decode PHP chr() encoded strings.
+	You can call it from a select statement, like this:
+
+	... | select($decode_php_chr(headers[User_Agent]), *)
+
+*/
+
+$decode_php_chr(string) {
+  $array = PARSE("LD* ARRAY{ 'chr(' INT:c ')' ('.' | '+' | '||')?}{1,2000}:ascii_codes LD* EOS", $string);
+  $ret = IF($array is NULL, [0], $array);
+  return $to_char($ret);
+};
+$to_char(array) = CREATE FUNCTION(
+  language:'javascript',
+  returns::string,
+  code:$code
+);
+
+$code = <<<EOC
+  var ret = [];
+
+  	for(var i=0; i<array.length; i++) {
+	  ret.push(array[i] >= 0 && array[i] < 0x7f ? String.fromCharCode(array[i]) : '.');
+	}
+
+	return ret.join("");
+
+EOC;
