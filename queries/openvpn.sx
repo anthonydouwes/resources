@@ -29,4 +29,4 @@ LIST('file://path/to/file.txt')
 | parse(pattern:$pattern)
 
 //this select statement gets rid of newlines in usernames in ver 2.6.1
-| select(username:REPLACE(username, '\n', ''),*) 
+| select(username:REPLACE(username, '\n', ''),*)
