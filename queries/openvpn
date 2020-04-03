@@ -1,0 +1,32 @@
+$pattern = <<<PATTERN
+   // OpenVPN Access Server logs.
+   // Tested with version 2.6.1 and 2.7.5
+
+   LD:node
+   ',' DATA*:username
+   (',' TIMESTAMP('MM/dd/yy HH:mm'):start_time) // Grouped with comma because username may contain comma.
+   ',' LD*:duration
+   ',' LD*:service
+   ',' IPADDR*:real_ip
+   ',' IPADDR*:vpn_ip
+   ',' UPPER*:proto
+   ',' INT*:port
+   ',' FLOAT*:bytes_in ' '? ENUM{''=0,'B'=1, 'KB'=1024, 'MB'=1048576, 'GB'=1073741824}(cis=true):unit_in
+   ',' FLOAT*:bytes_out ' '? ENUM{''=0,'B'=1, 'KB'=1024, 'MB'=1048576, 'GB'=1073741824}(cis=true):unit_out
+   ','? LD?:error (EOL| EOS)
+
+PATTERN;
+
+//additional variables for better insight into time and data sent/received
+$KB=1024;
+$MB=1024*1024;
+$GB=1024*1024*1024;
+
+$timeToSec(t)=long(parse("TIMESTAMP('mm:ss', tz='GMT'):t", $t))%86400000L/1000; //define TimeToSec variable to include milliseconds in time operations
+
+//replace with path to your OpenVPN log file here:
+LIST('file://path/to/file.txt')
+| parse(pattern:$pattern)
+
+//this select statement gets rid of newlines in usernames in ver 2.6.1
+| select(username:REPLACE(username, '\n', ''),*) 
