@@ -43,7 +43,7 @@ array{WINEOL? LD:command (WINEOL|EOL) DATA{0,1600000}:output ( (>> ('PS' LD '>')
 PATTERN;
 
 // Modify with path to your files
-LIST('file:file:/C:/Logs/powershell/$yyyy$$MM$$dd$/PowerShell_transcript.*.$yyyy$$MM$$dd$$HH$$mm$$ss$.txt')
+LIST('file:/C:/Logs/powershell/$yyyy$$MM$$dd$/PowerShell_transcript.*.$yyyy$$MM$$dd$$HH$$mm$$ss$.txt')
            | filter(path_time >= $from[-1 day] and path_time <= $to[+1 day]) // filter selected days 
 
 | parse(pattern:$pattern)
